@@ -2,8 +2,8 @@
  * Application Config
  */
 var BaseURL;
-BaseURL = "../service/";
 BaseURL = "http://umairashraf.me/testing/IU/v2/service/";
+BaseURL = "../service/";
 
 /**
  * For console that can't suck errors
