@@ -1,6 +1,5 @@
 <?php
-require ("common/Iqra.php");
-require ("common/simple_html_dom.php");
+require ("common/iulms.edu.pk.php");
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Content-type: application/json');
@@ -16,7 +15,6 @@ if (isset($_REQUEST["pwd"])) {
 	$Pwd = $_REQUEST["pwd"];
 }
 
-$out = Login($RegId, $Pwd);
-$output = array("login" => $out);
-echo json_encode($output);
+$output = Login($RegId, $Pwd);
+echo json_format($output);
 ?>
