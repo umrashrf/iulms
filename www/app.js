@@ -2,39 +2,38 @@
  * Application Config
  */
 var BaseURL;
-BaseURL = "http://umairashraf.me/testing/IU/v2/service/";
-BaseURL = "../service/";
+BaseURL = "http://umairashraf.me/testing/IU/v1.3/service";
+BaseURL = "../service";
 
 /**
  * For console that can't suck errors
  */
+/*
 window.onerror = function(msg, url, line) {
-	console.log(line + ": " + msg);
-};
+console.log(line + ": " + msg);
+};*/
+
+/**
+ * Sencha Touch 2 loader cofiguration to auto load views, models, stores, profiles and controllers
+ */
+Ext.Loader.setConfig({
+	enabled : true
+});
 
 /**
  * Sencha Touch application instance
  */
-var IQRAUniversity = new Ext.Application({
-	name : 'IQRAUniversity',
+Ext.application({
+	name : 'IU',
+	models : ['Attendance', 'Transcript'],
+	stores : ['Attendance', 'Transcript'],
+	views : ['Main', 'Login', 'Tabs', 'Attendance', 'Transcript'],
+	controllers : ['Main'],
 
 	launch : function() {
-		this.launched = true;
-		this.network = false;
-		this.mainLaunch();
-	},
-	mainLaunch : function() {
-		if(!Ext.is.Desktop) {
-			if(!device || !this.launched) {
-				return;
-			}
-			this.network = !(navigator.network.connection.type == Connection.NONE);
-		}
-		this.views.Viewport = new this.views.Viewport();
+		Ext.create('IU.view.Main', {
+			id : 'iu-main',
+			fullscreen : true
+		});
 	}
 });
-
-/**
- * Phonegap ready listener to start the app
- */
-document.addEventListener("deviceready", IQRAUniversity.mainLaunch, false);
