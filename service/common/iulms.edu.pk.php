@@ -15,7 +15,7 @@ function Login($RegId, $Pwd) {
 	curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies/" . $RegId . ".txt");
+	curl_setopt($ch, CURLOPT_COOKIEJAR, realpath('.') . "/cookies/" . $RegId . ".txt");
 	curl_setopt($ch, CURLOPT_POST, TRUE);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$RegId&password=$Pwd");
@@ -49,7 +49,7 @@ function getProfile($RegId, $Pwd) {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
-		curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies/" . $RegId . ".txt");
+		curl_setopt($ch, CURLOPT_COOKIEFILE, realpath('.') . "/cookies/" . $RegId . ".txt");
 		$profile_output = curl_exec($ch);
 
 		curl_close($ch);
@@ -104,7 +104,7 @@ function getAttendance($RegId, $Pwd) {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
-		curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies/" . $RegId . ".txt");
+		curl_setopt($ch, CURLOPT_COOKIEFILE, realpath('.') . "/cookies/" . $RegId . ".txt");
 		$attendance_output = curl_exec($ch);
 
 		$attendance = array();
