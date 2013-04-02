@@ -13,3 +13,5 @@ I developed this application on windows (windows 7) and if you're on windows, yo
 3. Once cloned/downloaded the source, you can create a new folder under **C:\wamp\www** of name **iu** and copy the **www** and **service** folders from source folder to this wamp folder.
 
 4. Start wamp if it's not already running and hit this URL [http://localhost/iu/www/](http://localhost/iu/www/) in your browser (Chrome or Safari) and see it working.
+
+Happy Hacking!
