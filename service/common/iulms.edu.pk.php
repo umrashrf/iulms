@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 require ("Utility.php");
 require ("simple_html_dom.php");
 
@@ -110,24 +112,27 @@ function getAttendance($RegId, $Pwd) {
 		$attendance = array();
 		
 		$semester = "Semester " . date('Y');
-		
+
 		if ($attendance_output) {
 			// parse html and get all ids of courses
 			$html = str_get_html($attendance_output);
-			$selects = $html -> find('select[id=cmbStudentCourse]');
-			for ($s = 0; $s < count($selects); $s++) {
-				$select = $selects[$s];
-				$options = $select -> find('option');
-				for ($o = 0; $o < count($options); $o++) {
-					$option = $options[$o];
+			$courses = $html -> find('table.attendance-table tr.attendanceRow td.attendanceRowCourse');
+			foreach ($courses as $course) {
+				$found = preg_match('/^([\w\s]+)\((\d+)\)$/', $course->plaintext, $matches);
+				if ($found) {
+					$course_name = $matches[1];
+					$course_id = $matches[2];
+					
 					curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/SICDataService.php");
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 					curl_setopt($ch, CURLOPT_POST, TRUE);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetStudentAttendaceDetails&secCourseCode=" . $option -> value);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetStudentAttendaceDetails&secCourseCode=" . $course_id);
+					
 					$attendance_output = curl_exec($ch);
 					$sessions = 0;
 					$presents = 0;
 					$absents = 0;
+					
 					foreach (json_decode($attendance_output) as $a) {
 						$sessions++;
 						if ($a == "P") {
@@ -136,13 +141,15 @@ function getAttendance($RegId, $Pwd) {
 							$absents++;
 						}
 					}
+					
 					$attendance[count($attendance)] = array(
-														"semester" => $semester, 
-														"course_id" => $option->value,
-														"course_name" => $option->plaintext, 
-														"sessions" => $sessions,
-														"presents" => $presents,
-														"absents" => $absents);
+						"semester" => $semester, 
+						"course_id" => $course_id,
+						"course_name" => $course_name, 
+						"sessions" => $sessions,
+						"presents" => $presents,
+						"absents" => $absents
+					);
 				}
 			}
 		}
