@@ -6,6 +6,24 @@ Ext.define('IU.view.Transcript', {
 		cls : 'iu-transcript',
 		layout : 'fit',
 		items : [{
+			xtype : 'toolbar',
+			docked : 'bottom',
+			layout : {
+				type : 'hbox',
+				align : 'center',
+				pack : 'center'
+			},
+			defaults : {
+				flex : 1
+			},
+			items : [{
+				xtype : 'panel',
+				html : 'CGPA: '
+			}, {
+				xtype : 'panel',
+				html : 'Credit Hours: '
+			}]
+		}, {
 			xtype : 'list',
 			store : 'Transcript',
 			grouped : true,
@@ -25,13 +43,29 @@ Ext.define('IU.view.Transcript', {
 				}
 			}],
 			listeners : {
-				activate : function() {
-					this.getStore().load({
-						params : {
-							id : window.localStorage.getItem("id"),
-							pwd : window.localStorage.getItem("pwd")
-						}
-					});
+				painted : function(sender, eOpts) {
+					target = Ext.getCmp('iu-transcript').getAt(1);
+
+					if (!target.getStore().isLoaded()) {
+						target.setMasked({
+							xtype : 'loadmask',
+							message : 'Loading Transcript'
+						});
+
+						target.getStore().load({
+							params : {
+								id : window.localStorage.getItem("id"),
+								pwd : window.localStorage.getItem("pwd")
+							},
+							callback : function(records, operation, success) {
+								transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
+								
+								transcript.cgpa
+
+								target.setMasked(false);	
+							}
+						});	
+					}
 				}
 			}
 		}]

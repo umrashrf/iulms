@@ -68,6 +68,9 @@ body {
 }
 .iu-login {
 }
+.iu-login .x-dock {
+	width: 100%;
+}
 .iu-login .content {
 	padding: 0.5em;
 	margin-top: 3%;
@@ -156,6 +159,9 @@ body {
 }
 .iu-transcript-item-grade {
 	font-size: 65%;
+}
+.iu-transcript .x-toolbar {
+	background: #CCCCCC;
 }
 .iu-cafe {
 }

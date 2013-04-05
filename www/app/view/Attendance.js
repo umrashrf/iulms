@@ -22,13 +22,25 @@ Ext.define('IU.view.Attendance', {
 			}
 		}],
 		listeners : {
-			activate : function() {
-				this.getStore().load({
-					params : {
-						id : window.localStorage.getItem("id"),
-						pwd : window.localStorage.getItem("pwd")
-					}
-				});
+			painted : function(sender, eOpts) {
+				target = Ext.getCmp('iu-attendance');
+
+				if (!target.getStore().isLoaded()) {
+					target.setMasked({
+						xtype : 'loadmask',
+						message : 'Loading Attendance'
+					});
+
+					target.getStore().load({
+						params : {
+							id : window.localStorage.getItem("id"),
+							pwd : window.localStorage.getItem("pwd")
+						},
+						callback : function() {
+							target.setMasked(false);	
+						}
+					});	
+				}
 			}
 		}
 	}

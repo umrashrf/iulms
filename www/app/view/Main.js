@@ -5,7 +5,6 @@ Ext.define('IU.view.Main', {
 	config : {
 		id : 'iu-main',
 		layout : 'card',
-		activeItem : (((window.localStorage.getItem("id") != null) && (window.localStorage.getItem("pwd") != null)) ? 1 : 0),
 		items : [{
 			id : 'iu-toolbar',
 			xtype : 'toolbar',

@@ -28,7 +28,7 @@ Ext.application({
 	models : ['Attendance', 'Transcript'],
 	stores : ['Attendance', 'Transcript'],
 	views : ['Main', 'Login', 'Tabs', 'Attendance', 'Transcript'],
-	controllers : ['Main'],
+	controllers : ['Main', 'Transcript'],
 
 	launch : function() {
 		Ext.create('IU.view.Main', {

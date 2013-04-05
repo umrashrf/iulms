@@ -4,9 +4,7 @@ Ext.define('IU.controller.Main', {
 	config : {
 		routes : {
 			'/login' : 'showLogin',
-			'/tabs' : 'showTabs',
-			'/attendance' : 'showAttendace',
-			'/transcript' : 'showTranscript'
+			'/tabs' : 'showTabs'
 		},
 		refs : {
 			main : '#iu-main',
@@ -20,7 +18,11 @@ Ext.define('IU.controller.Main', {
 		control : {
 			login : {
 				beforesubmit : 'onBeforeLogin',
-				submit : 'onLogin'
+				submit : 'onLoginPass',
+				exception : 'onLoginFail'
+			},
+			logoutButton : {
+				tap : 'onLogout'
 			}
 		}
 	},
@@ -43,7 +45,7 @@ Ext.define('IU.controller.Main', {
 		}
 
 		this.getLogoutButton().hide();
-		this.getToolbar().setTitle('IQRA University');
+		this.getToolbar().setTitle('IULMS');
 
 		this.getMain().animateActiveItem(0, {
 			type : 'slide',
@@ -60,13 +62,37 @@ Ext.define('IU.controller.Main', {
 			direction : 'left'
 		});
 
-		this.redirectTo('/attendance');
+		this.getTabs().setActiveItem(0);
+
+		this.getLogoutButton().show();
+		this.getToolbar().setTitle('IQRA University');
 	},
 	showAttendance : function() {
 		this.getLogoutButton().show();
 		this.getToolbar().setTitle('Attendance');
 
 		this.getTabs.setActiveItem(0);
+
+		var target = this.getAttendance();
+		
+		console.log(target);
+
+		target.setMasked({
+			xtype : 'loadmask',
+			message : 'Loading Attendance'
+		});
+
+		if (!target.getStore().isLoaded()) {
+			target.getStore().load({
+				params : {
+					id : window.localStorage.getItem("id"),
+					pwd : window.localStorage.getItem("pwd")
+				},
+				callback : function() {
+					target.setMasked(false);	
+				}
+			});	
+		}
 	},
 	showTranscript : function() {
 		this.getLogoutButton().show();
@@ -94,7 +120,7 @@ Ext.define('IU.controller.Main', {
 			message : 'Logging In...'
 		});
 	},
-	onLogin : function(sender, result, e, eOpts) {
+	onLoginPass : function(sender, result, e, eOpts) {
 		if(result && result.success == "true") {
 			var input = sender.getValues();
 
@@ -107,6 +133,22 @@ Ext.define('IU.controller.Main', {
 
 			this.redirectTo('/tabs');
 		}
+	},
+	onLoginFail : function(sender, result, eOpts) {
+		console.log(result);
+
+		if(result && result.success == "false") {
+			sender.setMasked(false);
+			Ext.Msg.alert("Oops!", "Reg No or Password is wrong.", Ext.emptyFn);
+		} else {
+			Ext.Msg.alert("Oops!", "Internal error occurred. Please consult developer.", Ext.emptyFn);
+		}
+	},
+	onLogout : function() {
+		window.localStorage.removeItem("id");
+		window.localStorage.removeItem("pwd");	
+
+		this.redirectTo('/login');
 	},
 	/**
 	 * Utility Functions
