@@ -29,7 +29,7 @@ Ext.define('IU.view.Transcript', {
 			grouped : true,
 			selectedCls : '',
 			itemTpl : ['<div>', '<div class="iu-transcript-item-course">{course_name}</div>', '<div class="iu-transcript-item-grade">Grade: {grade}, GPA: {gpa}</div>', '</div>'].join(''),
-			emptyText : 'You have no transcript.',
+			emptyText : 'IULMS returned no transcript data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
 				xclass : 'Ext.plugin.PullRefresh',
 				refreshFn : function(plugin) {
@@ -44,8 +44,9 @@ Ext.define('IU.view.Transcript', {
 			}],
 			listeners : {
 				painted : function(sender, eOpts) {
+					toolbar = Ext.getCmp('iu-transcript').getAt(0);
 					target = Ext.getCmp('iu-transcript').getAt(1);
-
+					
 					if (!target.getStore().isLoaded()) {
 						target.setMasked({
 							xtype : 'loadmask',
@@ -58,11 +59,10 @@ Ext.define('IU.view.Transcript', {
 								pwd : window.localStorage.getItem("pwd")
 							},
 							callback : function(records, operation, success) {
-								console.log(IU);
-								
 								transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
 								
-								transcript.cgpa
+								toolbar.getAt(0).setHtml('CGPA: ' + (transcript.cgpa | '0.0'));
+								toolbar.getAt(1).setHtml('Credit Hours: ' + (transcript.hours | 0));
 
 								target.setMasked(false);	
 							}
