@@ -1,6 +1,6 @@
 # Introduction
 
-The source code has two parts where you can contribute. One is front end (*www* folder) and other is back end (*service* folder). Front end uses JavaScript and Sencha Touch SDK to draw controls and views on screen whereas back end is written in PHP to call iqra.edu.pk to get student data. You can select among these based on what you're fluent with.
+The source code has two parts where you can contribute. One is frontend (*www* folder) and other is backend (*service* folder). Frontend uses JavaScript and Sencha Touch SDK to draw controls and views on screen whereas backend is written in PHP to call iulms.edu.pk to get student data. You can select among these based on what you're fluent with.
 
 # Installation
 
