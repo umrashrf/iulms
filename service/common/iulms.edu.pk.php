@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-
 require ("Utility.php");
 require ("simple_html_dom.php");
 
@@ -62,15 +60,14 @@ function getProfile($RegId, $Pwd) {
 			// parse html and get all ids and text of application subjects
 			$html = str_get_html($profile_output);
 			
-			$fname = $html -> find('input[name=firstname]');
-			if (count($fname) > 0) {
-				$fname = $fname[0]->value;		
+			$names = $html -> find('div[class="felement fstatic"]');
+			if (count($names) > 0) {
+				$fname = $names[0]->plaintext;		
 			} else {
 				$fname = "";
 			}
-			$lname = $html -> find('input[name=lastname]');
-			if (count($lname) > 0) {
-				$lname = $lname[0]->value;		
+			if (count($names) > 1) {
+				$lname = $names[1]->plaintext;		
 			} else {
 				$lname = "";
 			}
