@@ -1,24 +1,22 @@
 <?php
-require ("common/iulms.edu.pk.php");
-require ("common/config.inc.php");
-require ("common/Database.php");
-
 header('Cache-Control: no-cache, must-revalidate');
-header('Content-type: application/json');
+header('Content-type: application/xml');
 
-// https://www.facebook.com/feeds/page.php?format=rss20&id=140641789392100
+$rss = "https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100";
 
-$db = new Database(DB_SERVER, DB_USER, DB_PASS, DB_DATABASE);
-$db->connect();
-$news = $db->fetch_all_array("SELECT * FROM news ORDER BY posted_dt DESC");
-$db->close();
+$useragent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)";
 
-$output = array();
+$ch = curl_init();
 
-foreach ($news as $new) {
-	$output[count($output)] = $new;	
-}
+curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
+curl_setopt($ch, CURLOPT_URL, $rss);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POST, FALSE);
+$output = curl_exec($ch);
 
-$output = json_encode($output);
-echo json_format($output);
+echo $output;
+
+curl_close($ch);
 ?>
