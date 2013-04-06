@@ -16,5 +16,17 @@ if (isset($_REQUEST["pwd"])) {
 }
 
 $output = getTranscript($RegId, $Pwd);
+$output = json_decode($output);
+
+// calculating total credit hours done
+$total = 0;
+foreach ($output->attemptedCourses as $course) {
+	if ($course -> crsGrade != "F" && $course -> crsGrade != "W") {
+		$total += $course -> crsHours;
+	}
+}
+$output['hours'] = $total;
+
+$output = json_encode($output);
 echo json_format($output);
 ?>
