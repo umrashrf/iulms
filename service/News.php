@@ -1,8 +1,12 @@
 <?php
+$rss = "https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100";
+
+// only for production because there is no cross domain restriction
+// header('Location: ' . $rss);
+
+// for development
 header('Cache-Control: no-cache, must-revalidate');
 header('Content-type: application/xml');
-
-$rss = "https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100";
 
 $useragent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)";
 

@@ -18,12 +18,6 @@ Ext.define('IU.view.Login', {
 				placeHolder : 'Password'
 			}]
 		}, {
-			xtype : 'button',
-			text : 'Login',
-			handler : function() {
-				this.up('formpanel').submit();
-			}
-		}, {
 			xtype : 'panel',
 			cls : 'credits',
 			html : '<a href="http://umairashraf.me/">umairashraf.me</a>'

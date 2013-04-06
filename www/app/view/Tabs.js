@@ -12,6 +12,10 @@ Ext.define('IU.view.Tabs', {
 			id : 'iu-transcript',
 			xtype : 'iu-transcript',
 			title : 'Transcript'
+		}, {
+			id : 'iu-news',
+			xtype : 'iu-news',
+			title : 'News'
 		}]
 	}
 });

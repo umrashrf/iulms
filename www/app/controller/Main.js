@@ -9,11 +9,13 @@ Ext.define('IU.controller.Main', {
 		refs : {
 			main : '#iu-main',
 			toolbar : '#iu-toolbar',
+			loginButton : '#iu-buttons-login',
 			logoutButton : '#iu-buttons-logout',
 			login : '#iu-login',
 			tabs : '#iu-tabs',
 			attendance : '#iu-attendance',
-			transcript : '#iu-transcript'
+			transcript : '#iu-transcript',
+			news : '#iu-news'
 		},
 		control : {
 			login : {
@@ -21,8 +23,14 @@ Ext.define('IU.controller.Main', {
 				submit : 'onLoginPass',
 				exception : 'onLoginFail'
 			},
+			loginButton : {
+				tap : 'onLogin'
+			},
 			logoutButton : {
 				tap : 'onLogout'
+			},
+			news : {
+				itemtap : 'onNewsTap'
 			}
 		}
 	},
@@ -44,6 +52,7 @@ Ext.define('IU.controller.Main', {
 			return false;
 		}
 
+		this.getLoginButton().show();
 		this.getLogoutButton().hide();
 		this.getToolbar().setTitle('IULMS');
 
@@ -64,6 +73,7 @@ Ext.define('IU.controller.Main', {
 
 		this.getTabs().setActiveItem(0);
 
+		this.getLoginButton().hide();
 		this.getLogoutButton().show();
 		this.getToolbar().setTitle('IQRA University');
 	},
@@ -99,6 +109,9 @@ Ext.define('IU.controller.Main', {
 		this.getToolbar().setTitle('Transcript');
 
 		this.getTabs.setActiveItem(1);
+	},
+	onLogin : function() {
+		Ext.getCmp('iu-login').submit();
 	},
 	/**
 	 * Event Handlers
@@ -149,6 +162,9 @@ Ext.define('IU.controller.Main', {
 		window.localStorage.removeItem("pwd");	
 
 		this.redirectTo('/login');
+	},
+	onNewsTap : function(sender, index, target, record, e, eOpts) {
+		window.location = record.get('link');
 	},
 	/**
 	 * Utility Functions

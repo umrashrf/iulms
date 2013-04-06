@@ -21,6 +21,11 @@ Ext.define('IU.view.Main', {
 			}, {
 				xtype : 'spacer'
 			}, {
+				id : 'iu-buttons-login',
+				xtype : 'button',
+				text : 'Login',
+				ui : 'action'
+			}, {
 				id : 'iu-buttons-logout',
 				xtype : 'button',
 				text : 'Logout',
