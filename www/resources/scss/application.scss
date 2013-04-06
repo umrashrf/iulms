@@ -1,4 +1,3 @@
-// 1. Variable overrides, example:
 $body-bg-color: #3B70A6;
  
 $base-color: #2a2b87;
@@ -17,8 +16,7 @@ $form-bg-color: none;
 $form-field-bg-color: rgba(1, 1, 1, 0);
 $form-label-color: rgba(1, 1, 1, 0);
   
-// 2. Include Sencha Touch styles
-@import '../../../../sencha-touch-2.0.1-rc/resources/themes/stylesheets/sencha-touch/default/all';
+@import '../../../../touch-2.1.1/resources/themes/stylesheets/sencha-touch/default/all';
 @include sencha-panel;
 @include sencha-buttons;
 @include sencha-sheet;

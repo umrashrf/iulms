@@ -8,7 +8,7 @@ Ext.define('IU.view.Attendance', {
 		grouped : true,
 		selectedCls : '',
 		itemTpl : ['<div>', '<div class="iu-attendance-item-course">{course_name}</div>', '<div class="iu-attendance-item-info">{absents} absents + {presents} presents / {sessions} sessions</div>', '</div>'].join(''),
-		emptyText : 'There is no attendance data.',
+		emptyText : 'IULMS returned no attendance data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 		plugins : [{
 			xclass : 'Ext.plugin.PullRefresh',
 			refreshFn : function(plugin) {

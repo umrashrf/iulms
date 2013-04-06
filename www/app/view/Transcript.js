@@ -58,6 +58,8 @@ Ext.define('IU.view.Transcript', {
 								pwd : window.localStorage.getItem("pwd")
 							},
 							callback : function(records, operation, success) {
+								console.log(IU);
+								
 								transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
 								
 								transcript.cgpa
