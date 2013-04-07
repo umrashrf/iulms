@@ -2,8 +2,8 @@
  * Application Config
  */
 var BaseURL;
-BaseURL = "http://umairashraf.me/testing/IU/v1.3/service";
 BaseURL = "http://192.168.1.7:81/service";
+BaseURL = "http://umairashraf.me/testing/IU/v2.0/service";
 BaseURL = "../service";
 
 /**
