@@ -6,10 +6,43 @@ html, body {
 	margin: 0;
 }
 body {
-	background: url(../img/Default.png) no-repeat;
+	background-color: #000000;
+	background-size: auto 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-image: url(../img/Default.png);
 }
 .x-clear {
 	clear: both;
+}
+.iu-box {
+	display: inline-block;
+}
+.iu-text-center {
+	text-align: center;
+}
+.iu-text-right {
+	text-align: right;
+}
+.iu-spinner {
+	padding: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	background-color: #000000;
+}
+.iu-spinner .x-loading-spinner {
+	font-size: 60%;
+}
+.iu-button {
+	border-radius: 0;
+	border: 0 !important;
+}
+.iu-button .x-button-icon {
+	width: 16px !important;
+	height: 16px !important;
+	-webkit-mask-size: 16px !important;
+}
+.iu-login {
 }
 .iu-login .credits {
 	text-align: center;
@@ -18,164 +51,47 @@ body {
 .iu-login .credits a {
 	text-decoration: none;
 }
-.iu-menu {
-	background-color: #E8E8E8;
-	background-image: -webkit-gradient(radial,center 50%,40,center center,350,from(#ffffff),to(rgba(255, 255, 255, 0)));
-	background-position: center;
-	background-repeat: repeat;
+.iu-tabs {
 }
-.iu-menu .header-wrapper {
-	border-bottom: 0.1em solid #000000;
+.iu-tabs .x-button-icon {
+	width: 24px !important;
+	height: 24px !important;
+	-webkit-mask-size: 24px !important;
 }
-.iu-menu .header-wrapper ul.header {
-	font-size: 150%;
-	font-family: 'ImperatorBronze';
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d8db0), color-stop(50%,#4d8db0), color-stop(51%,#447c9d), color-stop(100%,#447c9d));
+.iu-tabs .x-tab:nth-child(3).x-tab-active {
+	top: -12px;
+	height: 70px;
 }
-.iu-menu .header-wrapper li {
-	padding: 3%;
-	display: inline-block;
-	text-align: center;
+.iu-tabs .x-tab:nth-child(3).x-tab-active .x-button-icon {
+	top: 8px;
 }
-.iu-menu .header-wrapper li.first {
-	width: 80%;
-	color: #FFFFFF;
+.iu-tabs .x-tab:nth-child(3).x-tab-active .x-button-label {
+	position: relative;
+	top: 12px;
 }
-.iu-menu .header-wrapper li.last {
-	width: 20%;
-	background: #FFFFFF;
-}
-.iu-menu .header-wrapper li a {
-	position: absolute;
-	left: 1%;
-}
-.iu-menu .menu-wrapper {
-
-}
-.iu-menu .menu-wrapper ul.menu {
-	width: 100%;
-	padding: 5%;
-}
-.iu-menu .menu-wrapper ul.menu .menu-item {
-	display: inline-block;
-	width: 33.33%;
-	padding: 5%;
-}
-.iu-menu .menu-wrapper ul.menu .menu-item a {
-	display: block;
-	background-size: 100% 100%;
-	padding: 50%;
-}
-.iu-login {
-}
-.iu-login .content {
-	padding: 0.5em;
-	margin-top: 3%;
-}
-.iu-login .content .header {
-	margin-left: 0.3em;
-	margin-bottom: 0.5em;
-}
-.iu-login .content .form {
-	background: #ffffff;
-	border-radius: 0.5em;
-}
-.iu-login .content .form .x-panel-body {
-	padding: 0.3em;
-}
-.iu-login .content .developer {
-	text-align: center;
-	margin-top: 10%;
-}
-.iu-login .content .developer a {
-	text-decoration: none;
-	color: #000000;
-}
-.iu-login .buttons {
-	border: none;
-	padding: 1em;
-}
-.iu-login .buttons .button {
-	width: 100%;
-}
-.iu-news {
-
-}
-.iu-news-item-title {
-	font-size: 75%;
+.iu-list-item {
+	font-size: 85%;
 	font-weight: bold;
 }
-.iu-news-item-info {
+.iu-list-sub-item {
 	font-size: 65%;
+}
+.iu-news {
+}
+.iu-semesterschedule {
 }
 .iu-attendance {
 }
-.iu-attendance-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-attendance-item-info {
-	font-size: 65%;
-}
-.iu-courseschedule {
-}
-.iu-course-schedule-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-course-schedule-item-info, .iu-course-schedule-item-faculty {
-	font-size: 65%;
-}
-.iu-examschedule {
-}
-.iu-exam-schedule-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-exam-schedule-item-info, .iu-exam-schedule-item-faculty {
-	font-size: 65%;
-}
-.iu-result-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-result-item-grade {
-	font-size: 65%;
-}
-.iu-result-empty {
-	font-size: 75%;
-	font-weight: bold;
-	text-align: center;
-	padding: 1%;
-}
 .iu-transcript {
 }
-.iu-transcript-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-transcript-item-grade {
-	font-size: 65%;
-}
-.iu-transcript .x-toolbar {
+.iu-transcript .iu-transcript-toolbar {
+	font-size: 80%;
 	background: #FFFFFF;
+	border-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px -10px 15px rgba(0, 0, 0, 0.1);
 }
-.iu-cafe {
+.iu-transcript .iu-transcript-cgpa, .iu-transcript .iu-transcript-hours {
+	padding: 0.65em 0.8em;
 }
-.iu-cafe-item-name {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-cafe-item-details, .iu-cafe-item-timings, .iu-cafe-item-contact {
-	font-size: 65%;
-}
-.iu-teacher {
-
-}
-.iu-teacher-item-course {
-	font-size: 75%;
-	font-weight: bold;
-}
-.iu-teacher-item-info {
-	font-size: 65%;
+.iu-about {
 }

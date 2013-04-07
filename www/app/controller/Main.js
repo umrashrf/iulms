@@ -70,9 +70,7 @@ Ext.define('IU.controller.Main', {
 			type : 'slide',
 			direction : 'left'
 		});
-
-		this.getTabs().setActiveItem(0);
-
+		
 		this.getLoginButton().hide();
 		this.getLogoutButton().show();
 		this.getToolbar().setTitle('IQRA University');

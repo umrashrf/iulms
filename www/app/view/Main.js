@@ -11,24 +11,23 @@ Ext.define('IU.view.Main', {
 			docked : 'top',
 			title : 'IULMS',
 			items : [{
-				xtype : 'button',
-				ui : 'back',
-				text : 'Back',
-				hidden : true,
-				handler : function() {
-					window.history.go(-1);
-				}
-			}, {
 				xtype : 'spacer'
 			}, {
 				id : 'iu-buttons-login',
 				xtype : 'button',
 				text : 'Login',
-				ui : 'action'
+				ui : 'action',
+				cls : 'iu-button',
+				iconMask : true,
+				iconCls : 'user_add'
 			}, {
 				id : 'iu-buttons-logout',
 				xtype : 'button',
 				text : 'Logout',
+				ui : 'action',
+				cls : 'iu-button',
+				iconMask : true,
+				iconCls : 'user_remove2',
 				hidden : true
 			}]
 		}, {

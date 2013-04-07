@@ -25,9 +25,9 @@ Ext.Loader.setConfig({
  */
 Ext.application({
 	name : 'IU',
-	models : ['Attendance', 'Transcript', 'News'],
-	stores : ['Attendance', 'Transcript', 'News'],
-	views : ['Main', 'Login', 'Tabs', 'Attendance', 'Transcript', 'News'],
+	models : ['News', 'SemesterSchedule', 'Attendance', 'Transcript'],
+	stores : ['News', 'SemesterSchedule', 'Attendance', 'Transcript', 'About'],
+	views : ['Main', 'Login', 'Tabs', 'News', 'SemesterSchedule', 'Attendance', 'Transcript', 'About'],
 	controllers : ['Main', 'Transcript'],
 
 	launch : function() {

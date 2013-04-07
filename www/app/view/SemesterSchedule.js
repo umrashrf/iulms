@@ -1,14 +1,13 @@
-Ext.define('IU.view.Attendance', {
+Ext.define('IU.view.SemesterSchedule', {
 	extend : 'Ext.List',
-	xtype : 'iu-attendance',
+	xtype : 'iu-semesterschedule',
 	config : {
-		cls : 'iu-attendance',
+		cls : 'iu-semesterschedule',
 		layout : 'fit',
-		store : 'Attendance',
-		grouped : true,
+		store : 'SemesterSchedule',
 		selectedCls : '',
-		itemTpl : ['<div>', '<div class="iu-list-item">{course_name}</div>', '<div class="iu-list-sub-item">{absents} absents + {presents} presents / {sessions} sessions</div>', '</div>'].join(''),
-		emptyText : 'IULMS returned no attendance data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
+		itemTpl : ['<div>', '<div class="iu-list-item">{course_name} <small>by {faculty_name}</small></div>', '<div class="iu-list-sub-item">{day} {time}</div>', '</div>'].join(''),
+		emptyText : 'IULMS returned no semester schedule data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 		plugins : [{
 			xclass : 'Ext.plugin.PullRefresh',
 			refreshFn : function(plugin) {
@@ -23,12 +22,12 @@ Ext.define('IU.view.Attendance', {
 		}],
 		listeners : {
 			painted : function(sender, eOpts) {
-				target = Ext.getCmp('iu-attendance');
+				target = Ext.getCmp('iu-semesterschedule');
 
 				if (!target.getStore().isLoaded()) {
 					target.setMasked({
 						xtype : 'loadmask',
-						message : 'Loading Attendance'
+						message : 'Loading Schedule'
 					});
 
 					target.getStore().load({

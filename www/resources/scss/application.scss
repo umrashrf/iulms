@@ -1,10 +1,11 @@
-$body-bg-color: #3B70A6;
+$body-bg-color: #FFFFFF;
  
-$base-color: #2a2b87;
-$base-gradient: '#292a84';
-$active-color: #292a84;
+$base-color: #003FA7;
+$base-gradient: '#003FA7';
+$active-color: #00539d;
 
-$toolbar-gradient: 'glossy';
+$tabs-dark: $base-color;
+$tabs-light: #555;
 
 $loading-spinner-color: #C5D9E3;
 
@@ -33,3 +34,10 @@ $form-label-color: rgba(1, 1, 1, 0);
 @include sencha-form;
 @include sencha-msgbox;
 @include sencha-loading-spinner;
+
+@include pictos-iconmask(user_add);
+@include pictos-iconmask(user_remove2);
+@include pictos-iconmask(broadcast);
+@include pictos-iconmask(calendar);
+@include pictos-iconmask(user_business);
+@include pictos-iconmask(doc_list);
