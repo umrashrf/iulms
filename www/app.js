@@ -3,15 +3,17 @@
  */
 var BaseURL;
 BaseURL = "http://umairashraf.me/testing/IU/v1.3/service";
+BaseURL = "http://192.168.1.7:81/service";
 BaseURL = "../service";
 
 /**
  * For console that can't suck errors
- */
+*/
 /*
 window.onerror = function(msg, url, line) {
-console.log(line + ": " + msg);
-};*/
+	console.log('IU Log: ' + line + ": " + msg);
+};
+*/
 
 /**
  * Sencha Touch 2 loader cofiguration to auto load views, models, stores, profiles and controllers

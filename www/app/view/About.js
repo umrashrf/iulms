@@ -9,7 +9,7 @@ Ext.define('IU.view.About', {
 			store : 'About',
 			grouped : true,
 			selectedCls : '',
-			itemTpl : '<div class="iu-box" style="width: 60%;">{name}</div><div class="iu-box iu-text-right" style="width: 40%;">{value}</div>',
+			itemTpl : '<div class="iu-box" style="width: 30%;">{name}</div><div class="iu-box iu-text-right" style="width: 70%;">{value}</div>',
 			emptyText : 'IULMS returned no profile data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
 			xclass : 'Ext.plugin.PullRefresh',
@@ -72,49 +72,51 @@ Ext.define('IU.view.About', {
 		}],
 		listeners : {
 			painted : function(sender, eOpts) {
-				var target = Ext.getCmp('iu-about').getAt(0);
+				setTimeout(function() {
+					var target = Ext.getCmp('iu-about').getAt(0);
 				
-				if (target.getStore().getAt(0).get('name') == 'Loading...') {
-					// load profile here
-					Ext.Ajax.request({
-					    url: BaseURL + '/Profile.php',
-					    params : {
-							id : window.localStorage.getItem("id"),
-							pwd : window.localStorage.getItem("pwd")
-						},
-					    callback : function(ajax, success, response) {
-					    	// rmeove Loading... item
-					    	target.getStore().removeAt(0);
+					if (target.getStore().getAt(0).get('name') == 'Loading...') {
+						// load profile here
+						Ext.Ajax.request({
+						    url: BaseURL + '/Profile.php',
+						    params : {
+								id : window.localStorage.getItem("id"),
+								pwd : window.localStorage.getItem("pwd")
+							},
+						    callback : function(ajax, success, response) {
+						    	// rmeove Loading... item
+						    	target.getStore().removeAt(0);
 
-					    	if (success) {
-					    		var json = Ext.JSON.decode(response.responseText);
-					        	
-					    		var items = [{
-					    			name : 'Reg ID',
-					    			value : json.reg_id,
-					    			group : 'Your Profile',
-					    			group_index : 0
-					    		}, {
-					    			name : 'Name',
-					    			value : json.first_name + json.last_name,
-					    			group : 'Your Profile',
-					    			group_index : 0
-					    		}, {
-					    			name : 'Email',
-					    			value : json.email,
-					    			group : 'Your Profile',
-					    			group_index : 0
-					    		}];
+						    	if (success) {
+						    		var json = Ext.JSON.decode(response.responseText);
+						        	
+						    		var items = [{
+						    			name : 'Reg ID',
+						    			value : json.reg_id,
+						    			group : 'Your Profile',
+						    			group_index : 0
+						    		}, {
+						    			name : 'Name',
+						    			value : json.first_name + json.last_name,
+						    			group : 'Your Profile',
+						    			group_index : 0
+						    		}, {
+						    			name : 'Email',
+						    			value : json.email,
+						    			group : 'Your Profile',
+						    			group_index : 0
+						    		}];
 
-					    		target.getStore().add(items);
-					    	}
+						    		target.getStore().add(items);
+						    	}
 
-					    	// save changes and reload
-					    	target.getStore().sync();
-					    	target.getStore().sort();
-					    }
-					});
-				}
+						    	// save changes and reload
+						    	target.getStore().sync();
+						    	target.getStore().sort();
+						    }
+						});
+					}
+				}, 100);
 			}
 		}
 	}

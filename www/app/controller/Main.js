@@ -72,7 +72,6 @@ Ext.define('IU.controller.Main', {
 		
 		this.getLoginButton().hide();
 		this.getLogoutButton().show();
-		this.getToolbar().setTitle('IQRA University');
 	},
 	showAttendance : function() {
 		this.getLogoutButton().show();

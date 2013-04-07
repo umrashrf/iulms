@@ -5,6 +5,7 @@ Ext.define('IU.view.Login', {
 		cls : 'iu-login',
 		url : BaseURL + '/Login.php',
 		submitOnAction : true,
+		standardSubmit : false,
 		items : [{
 			xtype : 'fieldset',
 			title : 'Type your IULMS credentials',
