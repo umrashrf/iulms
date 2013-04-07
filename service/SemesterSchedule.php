@@ -15,6 +15,6 @@ if (isset($_REQUEST["pwd"])) {
 	$Pwd = $_REQUEST["pwd"];
 }
 
-$output = getSchedule($RegId, $Pwd);
+$output = getSemesterSchedule($RegId, $Pwd);
 echo json_format($output);
 ?>

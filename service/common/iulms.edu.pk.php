@@ -164,7 +164,7 @@ function getAttendance($RegId, $Pwd) {
  * @param RegId student IULMS registration id
  * @param Pwd student IULMS password 
  */
-function getSchedule($RegId, $Pwd) {
+function getSemesterSchedule($RegId, $Pwd) {
 	$useragent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)";
 
 	if (Login($RegId, $Pwd)) {
@@ -184,20 +184,20 @@ function getSchedule($RegId, $Pwd) {
 		if ($attendance_output) {
 			// parse html and get all ids of courses
 			$html = str_get_html($attendance_output);
-			$selects = $html -> find('select[id=cmbStudentCourse]');
-			for ($s = 0; $s < count($selects); $s++) {
-				$select = $selects[$s];
-				$options = $select -> find('option');
-				for ($o = 0; $o < count($options); $o++) {
-					$option = $options[$o];
+			$courses = $html -> find('table.attendance-table tr.attendanceRow td.attendanceRowCourse');
+			foreach ($courses as $course) {
+				$found = preg_match('/^([\w\s]+)\((\d+)\)$/', $course->plaintext, $matches);
+				if ($found) {
+					$course_id = $matches[2];
+					
 					curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/SICDataService.php");
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 					curl_setopt($ch, CURLOPT_POST, TRUE);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetCourseInfo&secCourseCode=" . $option -> value);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetCourseInfo&secCourseCode=" . $course_id);
 					$schedule_output = curl_exec($ch);
 					$schedule[count($schedule)] = json_decode($schedule_output);
 				}
-			}
+			}			
 		}
 
 		curl_close($ch);

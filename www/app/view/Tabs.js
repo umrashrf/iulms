@@ -5,6 +5,10 @@ Ext.define('IU.view.Tabs', {
 		cls : 'iu-tabs',
 		tabBarPosition : 'bottom',
 		items : [{
+			id : 'iu-news',
+			xtype : 'iu-news',
+			title : 'News'
+		}, {
 			id : 'iu-attendance',
 			xtype : 'iu-attendance',
 			title : 'Attendance'
@@ -12,10 +16,6 @@ Ext.define('IU.view.Tabs', {
 			id : 'iu-transcript',
 			xtype : 'iu-transcript',
 			title : 'Transcript'
-		}, {
-			id : 'iu-news',
-			xtype : 'iu-news',
-			title : 'News'
 		}]
 	}
 });

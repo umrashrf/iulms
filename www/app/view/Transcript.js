@@ -38,14 +38,23 @@ Ext.define('IU.view.Transcript', {
 						params : {
 							id : window.localStorage.getItem("id"),
 							pwd : window.localStorage.getItem("pwd")
+						},
+						callback : function(records, operation, success) {
+							var transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
+							
+							var toolbar = Ext.getCmp('iu-transcript').getAt(0);
+							toolbar.getAt(0).setHtml('CGPA: ' + (transcript.cgpa || '0.0'));
+							toolbar.getAt(1).setHtml('Credit Hours: ' + (transcript.hours || 0));
+
+							target.setMasked(false);	
 						}
 					});
 				}
 			}],
 			listeners : {
 				painted : function(sender, eOpts) {
-					toolbar = Ext.getCmp('iu-transcript').getAt(0);
-					target = Ext.getCmp('iu-transcript').getAt(1);
+					var toolbar = Ext.getCmp('iu-transcript').getAt(0);
+					var target = Ext.getCmp('iu-transcript').getAt(1);
 					
 					if (!target.getStore().isLoaded()) {
 						target.setMasked({
@@ -59,9 +68,9 @@ Ext.define('IU.view.Transcript', {
 								pwd : window.localStorage.getItem("pwd")
 							},
 							callback : function(records, operation, success) {
-								transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
+								var transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
 								
-								toolbar.getAt(0).setHtml('CGPA: ' + (transcript.cgpa | '0.0'));
+								toolbar.getAt(0).setHtml('CGPA: ' + (transcript.cgpa || '0.0'));
 								toolbar.getAt(1).setHtml('Credit Hours: ' + (transcript.hours | 0));
 
 								target.setMasked(false);	
