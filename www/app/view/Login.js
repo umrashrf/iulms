@@ -21,6 +21,27 @@ Ext.define('IU.view.Login', {
 			xtype : 'panel',
 			cls : 'credits',
 			html : '<a href="http://umairashraf.me/">umairashraf.me</a>'
-		}]
+		}],
+		// need to move this to Main.js controller. It's a hack for ST bug
+		listeners : {
+			order : 'before',
+			beforesubmit : function(sender, values, options, eOpts) {
+				// check if it's right and return
+				if(values.id.replace(/ /g, "").length <= 0) {
+					Ext.Msg.alert("Oops!", "Reg. No. is required.", Ext.emptyFn);
+					return false;
+				}
+
+				if(values.pwd.replace(/ /g, "").length <= 0) {
+					Ext.Msg.alert("Oops!", "Password is required.", Ext.emptyFn);
+					return false;
+				}
+
+				sender.setMasked({
+					xtype : 'loadmask',
+					message : 'Logging In...'
+				});
+			}
+		}
 	}
 });

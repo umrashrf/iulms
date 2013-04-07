@@ -19,7 +19,6 @@ Ext.define('IU.controller.Main', {
 		},
 		control : {
 			login : {
-				beforesubmit : 'onBeforeLogin',
 				submit : 'onLoginPass',
 				exception : 'onLoginFail'
 			},
