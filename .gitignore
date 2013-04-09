@@ -3,3 +3,6 @@
 *.DS_Store
 *.sublime-*
 test.php
+android/gen/
+android/bin/
+chrome/
