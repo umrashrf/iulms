@@ -144,8 +144,6 @@ Ext.define('IU.controller.Main', {
 		}
 	},
 	onLoginFail : function(sender, result, eOpts) {
-		console.log(result);
-
 		if(result && result.success == "false") {
 			sender.setMasked(false);
 			Ext.Msg.alert("Oops!", "Reg No or Password is wrong.", Ext.emptyFn);
