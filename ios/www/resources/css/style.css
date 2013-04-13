@@ -1,0 +1,98 @@
+html, body {
+	font-family: sans-serif;
+	background-size: 100% 100%;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: #000000;
+	background-size: auto 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-image: url(../img/Default.png);
+}
+.x-clear {
+	clear: both;
+}
+.iu-box {
+	display: inline-block;
+}
+.iu-text-center {
+	text-align: center;
+}
+.iu-text-right {
+	text-align: right;
+}
+.iu-spinner {
+	padding: 5px;
+	border-radius: 5px;
+	display: inline-block;
+	background-color: #000000;
+}
+.iu-spinner .x-loading-spinner {
+	font-size: 60%;
+}
+.iu-button {
+	border-radius: 0;
+	border: 0 !important;
+}
+.iu-button .x-button-icon {
+	width: 16px !important;
+	height: 16px !important;
+	-webkit-mask-size: 16px !important;
+}
+.iu-login {
+}
+.iu-login .credits {
+	text-align: center;
+	margin: 15% 0 0 0;
+}
+.iu-login .credits a {
+	text-decoration: none;
+}
+.iu-tabs {
+}
+.iu-tabs .x-button-icon {
+	width: 24px !important;
+	height: 24px !important;
+	-webkit-mask-size: 24px !important;
+}
+.iu-tabs .x-tab:nth-child(3).x-tab-active {
+	top: -12px;
+	height: 70px;
+}
+.iu-tabs .x-tab:nth-child(3).x-tab-active .x-button-icon {
+	top: 8px;
+}
+.iu-tabs .x-tab:nth-child(3).x-tab-active .x-button-label {
+	position: relative;
+	top: 12px;
+}
+.iu-list-item {
+	font-size: 85%;
+	font-weight: bold;
+}
+.iu-list-sub-item {
+	font-size: 65%;
+}
+.iu-news {
+}
+.iu-semesterschedule {
+}
+.iu-attendance {
+}
+.iu-transcript {
+}
+.iu-transcript .iu-transcript-toolbar {
+	font-size: 80%;
+	background: #FFFFFF;
+	border-color: rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px -10px 15px rgba(0, 0, 0, 0.1);
+}
+.iu-transcript .iu-transcript-cgpa, .iu-transcript .iu-transcript-hours {
+	padding: 0.65em 0.8em;
+}
+.iu-about {
+	font-size: 75%;
+}
