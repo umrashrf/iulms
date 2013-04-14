@@ -10,10 +10,6 @@ Ext.define('IU.store.Transcript', {
 				rootProperty : 'attemptedCourses'
 			}
 		},
-		sorters : [{
-			property : 'semester_no',
-			direction : 'DESC'
-		}],
 		grouper : {
 			groupFn : function(record) {
 				if(record && record.data.semester_name) {
@@ -21,7 +17,8 @@ Ext.define('IU.store.Transcript', {
 				} else {
 					return '';
 				}
-			}
+			},
+			sortProperty: 'semester_no'
 		}
 	}
 });
