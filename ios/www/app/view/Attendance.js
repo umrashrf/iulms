@@ -23,24 +23,27 @@ Ext.define('IU.view.Attendance', {
 		}],
 		listeners : {
 			painted : function(sender, eOpts) {
-				target = Ext.getCmp('iu-attendance');
+				var task  =Ext.create('Ext.util.DelayedTask', function() {
+					target = Ext.getCmp('iu-attendance');
 
-				if (!target.getStore().isLoaded()) {
-					target.setMasked({
-						xtype : 'loadmask',
-						message : 'Loading Attendance'
-					});
+					if (!target.getStore().isLoaded()) {
+						target.setMasked({
+							xtype : 'loadmask',
+							message : 'Loading Attendance'
+						});
 
-					target.getStore().load({
-						params : {
-							id : window.localStorage.getItem("id"),
-							pwd : window.localStorage.getItem("pwd")
-						},
-						callback : function() {
-							target.setMasked(false);	
-						}
-					});	
-				}
+						target.getStore().load({
+							params : {
+								id : window.localStorage.getItem("id"),
+								pwd : window.localStorage.getItem("pwd")
+							},
+							callback : function() {
+								target.setMasked(false);	
+							}
+						});	
+					}
+				});
+				task.delay(250);
 			}
 		}
 	}

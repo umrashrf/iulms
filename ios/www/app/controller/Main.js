@@ -2,6 +2,7 @@ Ext.define('IU.controller.Main', {
 	extend : 'Ext.app.Controller',
 
 	config : {
+		focusedComponents : 0,
 		routes : {
 			'/login' : 'showLogin',
 			'/tabs' : 'showTabs'
@@ -44,6 +45,12 @@ Ext.define('IU.controller.Main', {
 				this.redirectTo("/login");
 			}
 
+		}
+
+		var cmps = Ext.ComponentQuery.query('textfield');
+		for (var c = 0; c < cmps.length; c++) {
+			cmps[c].on('focus', this.onFieldFocus, this);
+			cmps[c].on('blur', this.onFieldBlur, this);
 		}
 	},
 	showLogin : function() {
@@ -112,6 +119,21 @@ Ext.define('IU.controller.Main', {
 	/**
 	 * Event Handlers
 	 */
+	onFieldFocus : function(sender, e, eOpts) {
+		this.setFocusedComponents(this.getFocusedComponents() + 1);
+	},
+	onFieldBlur : function(sender, e, eOpts) {
+		var me = this;
+
+		this.setFocusedComponents(this.getFocusedComponents() - 1);
+		
+		var task = Ext.create('Ext.util.DelayedTask', function() {
+			if (me.getFocusedComponents() <= 0) {
+				window.scrollTo(0, 0);
+			}
+		});
+		task.delay(250);
+	},
 	onBeforeLogin : function(sender, values, options, eOpts) {
 		// check if it's right and return
 		if(values.id.replace(/ /g, "").length <= 0) {
