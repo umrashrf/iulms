@@ -1,6 +1,23 @@
+# Git
 .*
 !/.gitignore
+
+# Mac OS X
 *.DS_Store
+
+# Xcode
+ios/*.pbxuser
+ios/*.mode1v3
+ios/*.mode2v3
+ios/*.perspectivev3
+ios/*.xcuserstate
+ios/project.xcworkspace/
+ios/xcuserdata/
+
+# Backup files
+*~.nib
+
+# Project Specific
 *.sublime-*
 test.php
 android/gen/
