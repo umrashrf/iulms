@@ -19,13 +19,23 @@ $output = getTranscript($RegId, $Pwd);
 $output = json_decode($output, true);
 
 // calculating total credit hours done
-$total = 0;
+$hours = 0;
 foreach ($output["attemptedCourses"] as $course) {
 	if ($course["crsGrade"] != "F" && $course["crsGrade"] != "W") {
-		$total += $course["crsHours"];
+		$hours += $course["crsHours"];
 	}
 }
-$output["hours"] = $total;
+$output["hours"] = $hours;
+
+// calculating CGPA
+$cgpa = 0;
+foreach ($output["attemptedCourses"] as $course) {
+	if ($course["crsGrade"] != "F" && $course["crsGrade"] != "W") {
+		$cgpa += ($course["gpa"] * $course["crsHours"]);
+	}
+}
+$output["cgpa_custom"] = ($cgpa / $hours);
+
 
 $output = json_encode($output);
 echo json_format($output);
