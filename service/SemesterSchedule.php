@@ -1,6 +1,4 @@
 <?php
-require ("common/iulms.edu.pk.php");
-
 header('Cache-Control: no-cache, must-revalidate');
 header('Content-type: application/json');
 
@@ -13,6 +11,12 @@ if (isset($_REQUEST["id"])) {
 
 if (isset($_REQUEST["pwd"])) {
 	$Pwd = $_REQUEST["pwd"];
+}
+
+if ($RegId == "demo" && $Pwd == "demo") {
+	require ("common/demo.iulms.edu.pk.php");
+} else {
+	require ("common/iulms.edu.pk.php");
 }
 
 $output = getSemesterSchedule($RegId, $Pwd);
