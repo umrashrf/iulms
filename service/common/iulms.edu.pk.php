@@ -17,7 +17,7 @@ function Login($RegId, $Pwd) {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_COOKIEJAR, realpath('.') . "/cookies/" . $RegId . ".txt");
 	curl_setopt($ch, CURLOPT_POST, TRUE);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+	#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$RegId&password=$Pwd");
 	$login_output = curl_exec($ch);
 	$login_info = curl_getinfo($ch);
@@ -45,7 +45,7 @@ function getProfile($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/user/edit.php?cancelemailchange=1");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -99,7 +99,7 @@ function getAttendance($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/StudentAttendance.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -121,7 +121,7 @@ function getAttendance($RegId, $Pwd) {
 					$course_id = $matches[2];
 					
 					curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/SICDataService.php");
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+					#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 					curl_setopt($ch, CURLOPT_POST, TRUE);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetStudentAttendaceDetails&secCourseCode=" . $course_id);
 					
@@ -172,7 +172,7 @@ function getSemesterSchedule($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/StudentAttendance.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -191,7 +191,7 @@ function getSemesterSchedule($RegId, $Pwd) {
 					$course_id = $matches[2];
 					
 					curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/SICDataService.php");
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+					#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 					curl_setopt($ch, CURLOPT_POST, TRUE);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetCourseInfo&secCourseCode=" . $course_id);
 					$schedule_output = curl_exec($ch);
@@ -221,7 +221,7 @@ function getTranscript($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/Transcript.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -240,7 +240,7 @@ function getTranscript($RegId, $Pwd) {
 				for ($o = 0; $o < count($options); $o++) {
 					$option = $options[$o];
 					curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/SICDataService.php");
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+					#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
 					curl_setopt($ch, CURLOPT_POST, TRUE);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, "action=GetTranscript&degreeId=" . $option -> value);
 					$transcript_output = curl_exec($ch);
@@ -272,7 +272,7 @@ function getApplications($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/Applications.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -316,7 +316,7 @@ function getApplicationSubjects($RegId, $Pwd) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/Applications.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, FALSE);
@@ -363,7 +363,7 @@ function submitApplication($RegId, $Pwd, $To, $Subject, $Message) {
 
 		curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 		curl_setopt($ch, CURLOPT_URL, "http://iulms.edu.pk/sic/Applications.php");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		#curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, TRUE);

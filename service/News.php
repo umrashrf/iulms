@@ -14,7 +14,6 @@ $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
 curl_setopt($ch, CURLOPT_URL, $rss);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, FALSE);
