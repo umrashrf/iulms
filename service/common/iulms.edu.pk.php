@@ -115,7 +115,7 @@ function getAttendance($RegId, $Pwd) {
 			$html = str_get_html($attendance_output);
 			$courses = $html -> find('table.attendance-table tr.attendanceRow td.attendanceRowCourse');
 			foreach ($courses as $course) {
-				$found = preg_match('/^([\w\s]+)\((\d+)\)$/', $course->plaintext, $matches);
+				$found = preg_match('/^(.*)\s\((\d+)\)$/', $course->plaintext, $matches);
 				if ($found) {
 					$course_name = $matches[1];
 					$course_id = $matches[2];
@@ -186,7 +186,7 @@ function getSemesterSchedule($RegId, $Pwd) {
 			$html = str_get_html($attendance_output);
 			$courses = $html -> find('table.attendance-table tr.attendanceRow td.attendanceRowCourse');
 			foreach ($courses as $course) {
-				$found = preg_match('/^([\w\s]+)\((\d+)\)$/', $course->plaintext, $matches);
+				$found = preg_match('/^(.*)\s\((\d+)\)$/', $course->plaintext, $matches);
 				if ($found) {
 					$course_id = $matches[2];
 					
