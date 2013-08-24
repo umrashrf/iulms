@@ -180,7 +180,7 @@ Ext.define('IU.controller.Main', {
 		this.redirectTo('/login');
 	},
 	onNewsTap : function(sender, index, target, record, e, eOpts) {
-		window.location = record.get('link');
+		
 	},
 	/**
 	 * Utility Functions

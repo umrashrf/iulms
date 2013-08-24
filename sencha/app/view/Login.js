@@ -21,7 +21,7 @@ Ext.define('IU.view.Login', {
 		}, {
 			xtype : 'panel',
 			cls : 'credits',
-			html : '<a href="http://umairashraf.me/">umairashraf.me</a>'
+			html : '<a href="http://umairashraf.me/" target="_blank">umairashraf.me</a>'
 		}],
 		// need to move this to Main.js controller. It's a hack for ST bug
 		listeners : {
