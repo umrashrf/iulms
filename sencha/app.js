@@ -3,11 +3,11 @@
  */
 var BaseURL;
 BaseURL = "http://192.168.1.7:81/service";
-BaseURL = "../service";
+BaseURL = "";
 
 // to override service path on iOS, Android etc
 if (document.URL.indexOf("http://") === -1) {
-	BaseURL = "http://umairashraf.me/testing/IU/v2.0/service";	
+	BaseURL = "http://umairashraf.me/testing/IU/v2.0/service";
 }
 
 /**
