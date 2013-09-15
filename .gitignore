@@ -22,3 +22,4 @@ ios/xcuserdata/
 test.php
 android/gen/
 android/bin/
+*.pyc
