@@ -66,6 +66,10 @@ class Schedule(JSONFeed):
             return json.dumps(get_schedule(l))
         return json.dumps([])
 
+class Attendance(JSONFeed):
+    def GET(self):
+        return json.dumps([])
+
 class Transcript(JSONFeed):
     def GET(self):
         i = web.input(id='', pwd='', password='')
@@ -76,6 +80,13 @@ class Transcript(JSONFeed):
 
 class Profile(JSONFeed):
     def GET(self):
+        i = web.input(id='', pwd='', password='')
+        l = login(i.id, i.pwd or i.password)
+        if l:
+            return json.dumps(get_profile(l, i.id))
+        return json.dumps([])
+
+    def POST(self):
         i = web.input(id='', pwd='', password='')
         l = login(i.id, i.pwd or i.password)
         if l:
