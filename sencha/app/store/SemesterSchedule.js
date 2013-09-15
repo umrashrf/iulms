@@ -4,7 +4,7 @@ Ext.define('IU.store.SemesterSchedule', {
 		model : 'IU.model.SemesterSchedule',
 		proxy : {
 			type : 'ajax',
-			url : BaseURL + '/SemesterSchedule.php',
+			url : BaseURL + '/schedule',
 			reader : {
 				type : 'json'
 			}

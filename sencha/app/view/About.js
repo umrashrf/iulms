@@ -15,10 +15,10 @@ Ext.define('IU.view.About', {
 			xclass : 'Ext.plugin.PullRefresh',
 				refreshFn : function(plugin) {
 					var store = plugin.getList().getStore();
-					
+
 					// load profile here
 					Ext.Ajax.request({
-					    url: BaseURL + '/Profile.php',
+					    url: BaseURL + '/profile',
 					    params : {
 							id : window.localStorage.getItem("id"),
 							pwd : window.localStorage.getItem("pwd")
@@ -32,16 +32,16 @@ Ext.define('IU.view.About', {
 
 								if (store.getAt(0).get('name') == 'Reg ID') {
 									// List already got profile items so delete them first to add them again
-								    
+
 								    var profileItems = store.findRecord('group', 'Your Profile');
 								    while (profileItems) {
 								    	store.remove(profileItems);
 								    	profileItems = store.findRecord('group', 'Your Profile');
 								    }
 								}
-					    		
+
 					    		var json = Ext.JSON.decode(response.responseText);
-					        	
+
 					    		var items = [{
 					    			name : 'Reg ID',
 					    			value : json.reg_id,
@@ -74,11 +74,11 @@ Ext.define('IU.view.About', {
 			painted : function(sender, eOpts) {
 				setTimeout(function() {
 					var target = Ext.getCmp('iu-about').getAt(0);
-				
+
 					if (target.getStore().getAt(0).get('name') == 'Loading...') {
 						// load profile here
 						Ext.Ajax.request({
-						    url: BaseURL + '/Profile.php',
+						    url: BaseURL + '/profile',
 						    params : {
 								id : window.localStorage.getItem("id"),
 								pwd : window.localStorage.getItem("pwd")
@@ -89,7 +89,7 @@ Ext.define('IU.view.About', {
 
 						    	if (success) {
 						    		var json = Ext.JSON.decode(response.responseText);
-						        	
+
 						    		var items = [{
 						    			name : 'Reg ID',
 						    			value : json.reg_id,

@@ -3,7 +3,7 @@ Ext.define('IU.view.Login', {
 	xtype : 'iu-login',
 	config : {
 		cls : 'iu-login',
-		url : BaseURL + '/Login.php',
+		url : BaseURL + '/login',
 		submitOnAction : true,
 		standardSubmit : false,
 		items : [{

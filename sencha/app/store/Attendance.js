@@ -4,7 +4,7 @@ Ext.define('IU.store.Attendance', {
 		model : 'IU.model.Attendance',
 		proxy : {
 			type : 'ajax',
-			url : BaseURL + '/Attendance.php',
+			url : BaseURL + '/attendance',
 			reader : {
 				type : 'json'
 			}
