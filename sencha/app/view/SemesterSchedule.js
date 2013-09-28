@@ -6,7 +6,7 @@ Ext.define('IU.view.SemesterSchedule', {
 		layout : 'fit',
 		store : 'SemesterSchedule',
 		selectedCls : '',
-		itemTpl : ['<div>', '<div class="iu-list-item">{course_name} <small>by {faculty_name}</small></div>', '<div class="iu-list-sub-item">{day} {time}</div>', '</div>'].join(''),
+		itemTpl : ['<div>', '<div class="iu-list-item">{course_name} <small>by {faculty_name}</small></div>', '<div class="iu-list-sub-item">{time} on {day}</div>', '</div>'].join(''),
 		emptyText : 'IULMS returned no semester schedule data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 		plugins : [{
 			xclass : 'Ext.plugin.PullRefresh',
@@ -36,9 +36,9 @@ Ext.define('IU.view.SemesterSchedule', {
 							pwd : window.localStorage.getItem("pwd")
 						},
 						callback : function() {
-							target.setMasked(false);	
+							target.setMasked(false);
 						}
-					});	
+					});
 				}
 			}
 		}

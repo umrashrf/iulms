@@ -17,8 +17,10 @@ def get_schedule(session):
     root = etree.HTML(schedule_page.content)
     trs = root.xpath('//div[p/span[contains(text(), "Semester Schedule")]]/following-sibling::table[1]/tr')
     for tr in trs:
-        day = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/span/text()'))
+        day = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/span/text()')).title()
+        day = 'N/A' if day == 'Non' else day
         time = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/text()'))
+        time = '00:00/00:00' if time == '/' else time
         hours = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/text()'))
         course_name = get_first(tr.xpath(get('Course Title'))).strip()
         faculty_name = get_first(tr.xpath(get('Faculty'))).strip()
