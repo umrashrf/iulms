@@ -7,6 +7,7 @@ import requests
 
 from login import login
 from schedule import get_schedule
+from attendance import get_attendance
 from transcript import get_transcript
 from profile import get_profile
 
@@ -68,6 +69,10 @@ class Schedule(JSONFeed):
 
 class Attendance(JSONFeed):
     def GET(self):
+        i = web.input(id='', pwd='', password='')
+        l = login(i.id, i.pwd or i.password)
+        if l:
+            return json.dumps(get_attendance(l))
         return json.dumps([])
 
 class Transcript(JSONFeed):
