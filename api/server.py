@@ -28,6 +28,8 @@ class General(Handler):
     app_dir = 'sencha'
 
     def GET(self, path):
+        if path.startswith('touch/'):
+            self.app_dir = ''
         root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../"))
         dest = '%s/%s/index.html' % (root, self.app_dir)
         if path:
@@ -36,12 +38,15 @@ class General(Handler):
             return f.read()
         return ''
 
-class JSONFeed(Handler):
+class JSONHandler(Handler):
     def __init__(self):
-        #web.header('Content-Type', 'application/json')
-        pass
+        web.header('Content-Type', 'application/json')
 
-class Login(JSONFeed):
+class XMLHandler(Handler):
+    def __init__(self):
+        web.header('Content-Type', 'application/xml')
+
+class Login(JSONHandler):
     def GET(self):
         i = web.input(id='', pwd='', password='')
         if login(i.id, i.pwd or i.password):
@@ -54,12 +59,12 @@ class Login(JSONFeed):
             return json.dumps({'success': 'true'})
         return json.dumps({'success': 'false'})
 
-class News:
+class News(XMLHandler):
     def GET(self):
         url = 'https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100'
         return requests.get(url).content
 
-class Schedule(JSONFeed):
+class Schedule(JSONHandler):
     def GET(self):
         i = web.input(id='', pwd='', password='')
         l = login(i.id, i.pwd or i.password)
@@ -67,7 +72,7 @@ class Schedule(JSONFeed):
             return json.dumps(get_schedule(l))
         return json.dumps([])
 
-class Attendance(JSONFeed):
+class Attendance(JSONHandler):
     def GET(self):
         i = web.input(id='', pwd='', password='')
         l = login(i.id, i.pwd or i.password)
@@ -75,7 +80,7 @@ class Attendance(JSONFeed):
             return json.dumps(get_attendance(l))
         return json.dumps([])
 
-class Transcript(JSONFeed):
+class Transcript(JSONHandler):
     def GET(self):
         i = web.input(id='', pwd='', password='')
         l = login(i.id, i.pwd or i.password)
@@ -83,7 +88,7 @@ class Transcript(JSONFeed):
             return json.dumps(get_transcript(l))
         return json.dumps([])
 
-class Profile(JSONFeed):
+class Profile(JSONHandler):
     def GET(self):
         i = web.input(id='', pwd='', password='')
         l = login(i.id, i.pwd or i.password)
