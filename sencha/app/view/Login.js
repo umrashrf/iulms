@@ -1,5 +1,6 @@
 Ext.define('IU.view.Login', {
 	extend : 'Ext.form.Panel',
+	requires: ['Ext.form.FieldSet', 'Ext.field.Password'],
 	xtype : 'iu-login',
 	config : {
 		cls : 'iu-login',

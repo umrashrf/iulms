@@ -1,0 +1,38 @@
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+
+$body-bg-color: #FFFFFF;
+
+$base-color: #003FA7;
+$base-gradient: '#003FA7';
+$active-color: #00539d;
+
+$tabs-dark: $base-color;
+$tabs-light: #555;
+
+$loading-spinner-color: #C5D9E3;
+
+$list-color: #000000;
+$list-header-bg-color: #ffffff;
+$list-header-gradient: 'glossy';
+
+$form-bg-color: none;
+$form-field-bg-color: rgba(1, 1, 1, 0);
+$form-label-color: rgba(1, 1, 1, 0);
+
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+// Custom code goes here..
+
+// Examples of using the icon mixin:
+// @include icon('user');
+
+@include icon('user_add', 'Q');
+@include icon('user_remove2', 'Q');
+@include icon('broadcast', 'f');
+@include icon('calendar', '\\');
+@include icon('user_business', 'U');
+@include icon('doc_list', 'F');
+@include icon('info', '?');

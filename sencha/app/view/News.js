@@ -4,6 +4,7 @@ Ext.define('IU.view.News', {
 	config : {
 		cls : 'iu-news',
 		store : 'News',
+		grouped: true,
 		selectedCls : '',
 		itemTpl : ['<div class="iu-list-item">{title}</div>'].join(''),
 		emptyText : '"Iqra University - IU" Facebook page has no updates.',
@@ -26,9 +27,9 @@ Ext.define('IU.view.News', {
 
 					target.getStore().load({
 						callback : function() {
-							target.setMasked(false);	
+							target.setMasked(false);
 						}
-					});	
+					});
 				}
 			}
 		}

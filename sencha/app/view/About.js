@@ -12,7 +12,7 @@ Ext.define('IU.view.About', {
 			itemTpl : '<div class="iu-box" style="width: 30%;">{name}</div><div class="iu-box iu-text-right" style="width: 70%;">{value}</div>',
 			emptyText : 'IULMS returned no profile data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
-			xclass : 'Ext.plugin.PullRefresh',
+				xclass : 'Ext.plugin.PullRefresh',
 				refreshFn : function(plugin) {
 					var store = plugin.getList().getStore();
 
@@ -68,7 +68,7 @@ Ext.define('IU.view.About', {
 					    }
 					});
 				}
-			}],
+			}]
 		}],
 		listeners : {
 			painted : function(sender, eOpts) {
