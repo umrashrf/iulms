@@ -23,3 +23,6 @@ test.php
 android/gen/
 android/bin/
 *.pyc
+
+# Sencha Touch
+build/
