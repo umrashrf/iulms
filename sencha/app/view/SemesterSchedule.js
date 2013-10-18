@@ -28,7 +28,7 @@ Ext.define('IU.view.SemesterSchedule', {
 				if (!target.getStore().isLoaded()) {
 					target.setMasked({
 						xtype : 'loadmask',
-						message : 'Loading Schedule'
+						message : 'Loading <br>Schedule'
 					});
 
 					target.getStore().load({

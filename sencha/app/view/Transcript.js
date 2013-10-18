@@ -63,7 +63,7 @@ Ext.define('IU.view.Transcript', {
 					if (!target.getStore().isLoaded()) {
 						target.setMasked({
 							xtype : 'loadmask',
-							message : 'Loading Transcript'
+							message : 'Loading <br>Transcript'
 						});
 
 						target.getStore().load({

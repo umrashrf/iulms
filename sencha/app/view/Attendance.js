@@ -36,7 +36,7 @@ Ext.define('IU.view.Attendance', {
 					if (!target.getStore().isLoaded()) {
 						target.setMasked({
 							xtype : 'loadmask',
-							message : 'Loading Attendance'
+							message : 'Loading Attendance...'
 						});
 
 						target.getStore().load({

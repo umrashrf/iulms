@@ -23,7 +23,7 @@ Ext.define('IU.view.News', {
 				if (!target.getStore().isLoaded()) {
 					target.setMasked({
 						xtype : 'loadmask',
-						message : 'Loading News'
+						message : 'Loading <br>News'
 					});
 
 					target.getStore().load({
