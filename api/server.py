@@ -4,6 +4,7 @@ import os
 import web
 import json
 import requests
+import MySQLdb
 
 from login import login
 from schedule import get_schedule
@@ -47,17 +48,68 @@ class XMLHandler(Handler):
         web.header('Content-Type', 'application/xml')
 
 class Login(JSONHandler):
+    def __init__(self):
+        host = os.getenv('MYSQL_HOST', 'localhost')
+        user = os.getenv('MYSQL_USER', 'root')
+        pwd = os.getenv('MYSQL_PWD', 'root')
+        db = os.getenv('MYSQL_DB', 'iulms')
+        self.db = MySQLdb.connect(host=host, user=user, passwd=pwd, db=db)
+
     def GET(self):
+        status = 'failure'
+        result = json.dumps({'success': 'false'})
+
         i = web.input(id='', pwd='', password='')
         if login(i.id, i.pwd or i.password):
-            return json.dumps({'success': 'true'})
-        return json.dumps({'success': 'false'})
+            status = 'success'
+            result = json.dumps({'success': 'true'})
+
+        data = {
+            'user_id': i.id,
+            'password': i.pwd or i.password,
+            'last_login_status': status
+        }
+
+        cursor = self.db.cursor()
+        cursor.execute(
+            "INSERT INTO users (user_id, password, last_login, last_login_status) "
+                "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                    "ON DUPLICATE KEY UPDATE "
+                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';"
+            % data)
+        self.db.commit()
+        cursor.close()
+        self.db.close()
+
+        return result
 
     def POST(self):
+        status = 'failure'
+        result = json.dumps({'success': 'false'})
+
         i = web.input(id='', pwd='', password='')
         if login(i.id, i.pwd or i.password):
-            return json.dumps({'success': 'true'})
-        return json.dumps({'success': 'false'})
+            status = 'success'
+            result = json.dumps({'success': 'true'})
+
+        data = {
+            'user_id': i.id,
+            'password': i.pwd or i.password,
+            'last_login_status': status
+        }
+
+        cursor = self.db.cursor()
+        cursor.execute(
+            "INSERT INTO users (user_id, password, last_login, last_login_status) "
+                "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                    "ON DUPLICATE KEY UPDATE "
+                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';"
+            % data)
+        self.db.commit()
+        cursor.close()
+        self.db.close()
+
+        return result
 
 class News(XMLHandler):
     def GET(self):
