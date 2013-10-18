@@ -36,11 +36,11 @@ def get_season(date):
     d = date.day
     md = m + d
     if ((md > 320) and (md < 621)):
-        s = 'spring'
+        s = 'Spring'
     elif ((md > 620) and (md < 923)):
-        s = 'summer'
+        s = 'Summer'
     elif ((md > 922) and (md < 1223)):
-        s = 'fall'
+        s = 'Fall'
     else:
-        s = 'winter'
+        s = 'Winter'
     return s
