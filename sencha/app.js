@@ -10,20 +10,13 @@
     will need to resolve manually.
 */
 
-var BaseURL;
-BaseURL = "http://192.168.1.7:81/service";
-BaseURL = "";
-
-// to override service path on iOS, Android etc
-if (document.URL.indexOf("http://") === -1) {
-    BaseURL = "http://umairashraf.me/testing/IU/v2.0/service";
-}
+BaseURL = '';
 
 Ext.application({
     name: 'IU',
 
     requires: [
-        'Ext.MessageBox', 'Ext.plugin.PullRefresh'
+        'Ext.MessageBox', 'Ext.plugin.PullRefresh', 'Ext.util.DelayedTask'
     ],
 
     models : [
@@ -62,6 +55,19 @@ Ext.application({
     },
 
     launch: function() {
+        Ext.Ajax.request({
+            url: 'app.json',
+            success: function(response) {
+                str = response.responseText.replace(/\/\*.*\*\//mg, '');
+                config = Ext.JSON.decode(str);
+
+                BaseURL = config['base_api_dev'];
+                if (document.URL.indexOf("http://") === -1) {
+                    BaseURL = config['base_api_prod'];
+                }
+            }
+        });
+
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 

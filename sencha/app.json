@@ -21,7 +21,12 @@
     /**
      * Base URL for API calls.
      */
-    "api": "",
+    "base_api_dev": "",
+
+    /**
+     * Base URL for API calls.
+     */
+    "base_api_prod": "http://www.iulmsapp.tk",
 
     /**
      * List of all JavaScript assets in the right execution order.
@@ -115,7 +120,7 @@
      * Extra resources to be copied along when build
      */
     "resources": [
-        "resources/images",
+        "resources/libs",
         "resources/icons",
         "resources/startup"
     ],
