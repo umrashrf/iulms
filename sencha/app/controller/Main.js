@@ -76,7 +76,7 @@ Ext.define('IU.controller.Main', {
 			type : 'slide',
 			direction : 'left'
 		});
-		
+
 		this.getLoginButton().hide();
 		this.getLogoutButton().show();
 	},
@@ -87,7 +87,7 @@ Ext.define('IU.controller.Main', {
 		this.getTabs.setActiveItem(0);
 
 		var target = this.getAttendance();
-		
+
 		console.log(target);
 
 		target.setMasked({
@@ -102,9 +102,9 @@ Ext.define('IU.controller.Main', {
 					pwd : window.localStorage.getItem("pwd")
 				},
 				callback : function() {
-					target.setMasked(false);	
+					target.setMasked(false);
 				}
-			});	
+			});
 		}
 	},
 	showTranscript : function() {
@@ -126,7 +126,7 @@ Ext.define('IU.controller.Main', {
 		var me = this;
 
 		this.setFocusedComponents(this.getFocusedComponents() - 1);
-		
+
 		var task = Ext.create('Ext.util.DelayedTask', function() {
 			if (me.getFocusedComponents() <= 0) {
 				window.scrollTo(0, 0);
@@ -158,8 +158,15 @@ Ext.define('IU.controller.Main', {
 			window.localStorage.setItem("id", input.id);
 			window.localStorage.setItem("pwd", input.pwd);
 
-			sender.reset();
+			// these variables prevents loading stores on every paint
+			// explicitly ask them to load on next pain
+			StoreStates['news'] = false;
+			StoreStates['semesterschedule'] = false;
+			StoreStates['attendance'] = false;
+			StoreStates['transcript'] = false;
+			StoreStates['about'] = false;
 
+			sender.reset();
 			sender.setMasked(false);
 
 			this.redirectTo('/tabs');
@@ -175,12 +182,19 @@ Ext.define('IU.controller.Main', {
 	},
 	onLogout : function() {
 		window.localStorage.removeItem("id");
-		window.localStorage.removeItem("pwd");	
+		window.localStorage.removeItem("pwd");
+
+		// these variables prevents loading stores on every paint
+		StoreStates['news'] = false;
+		StoreStates['semesterschedule'] = false;
+		StoreStates['attendance'] = false;
+		StoreStates['transcript'] = false;
+		StoreStates['about'] = false;
 
 		this.redirectTo('/login');
 	},
 	onNewsTap : function(sender, index, target, record, e, eOpts) {
-		
+
 	},
 	/**
 	 * Utility Functions

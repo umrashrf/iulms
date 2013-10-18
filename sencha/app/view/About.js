@@ -15,7 +15,8 @@ Ext.define('IU.view.About', {
 			plugins : [{
 				xclass : 'Ext.plugin.PullRefresh',
 				fetchLatest : function() {
-					var store = this.getList().getStore();
+					target = this.getList();
+					target.refresh();
 
 					// load profile here
 					Ext.Ajax.request({
@@ -25,22 +26,9 @@ Ext.define('IU.view.About', {
 							pwd : window.localStorage.getItem("pwd")
 						},
 					    callback : function(ajax, success, response) {
+					    	target.getStore().removeAll();
+
 					    	if (success) {
-					    		if (store.getAt(0).get('name').indexOf('Loading') == 0) {
-									// rmeove Loading... item
-								    store.removeAt(0);
-								}
-
-								if (store.getAt(0).get('name') == 'Reg ID') {
-									// List already got profile items so delete them first to add them again
-
-								    var profileItems = store.findRecord('group', 'Your Profile');
-								    while (profileItems) {
-								    	store.remove(profileItems);
-								    	profileItems = store.findRecord('group', 'Your Profile');
-								    }
-								}
-
 					    		var json = Ext.JSON.decode(response.responseText);
 
 					    		var items = [{
@@ -58,12 +46,38 @@ Ext.define('IU.view.About', {
 					    			value : json.email,
 					    			group : 'Your Profile',
 					    			group_index : 0
-					    		}];
-					    		store.add(items);
+					    		}, {
+									name : 'Name',
+									value : 'IQRA University (IU)',
+									group : 'App Info',
+									group_index : 1
+								}, {
+									name : 'Version',
+									value : '2.0',
+									group : 'App Info',
+									group_index : 1
+								}, {
+									name : 'Founded Year',
+									value : '2011',
+									group : 'App Info',
+									group_index : 1
+								}, {
+									name : 'Name',
+									value : 'Umair Ashraf',
+									group : 'Developer Info',
+									group_index : 2
+								}, {
+									name : 'Website',
+									value : 'http://umairashraf.me/',
+									group : 'Developer Info',
+									group_index : 2
+								}];
+
+					    		target.getStore().add(items);
 
 						    	// save changes and reload
-						    	store.sync();
-						    	store.sort();
+						    	target.getStore().sync();
+						    	target.getStore().sort();
 					    	}
 					    }
 					});
@@ -81,7 +95,7 @@ Ext.define('IU.view.About', {
 				setTimeout(function() {
 					var target = Ext.getCmp('iu-about').getAt(0);
 
-					if (target.getStore().getAt(0).get('name') == 'Loading...') {
+					if (!StoreStates['about']) {
 						// load profile here
 						Ext.Ajax.request({
 						    url: BaseURL + '/profile',
@@ -90,8 +104,7 @@ Ext.define('IU.view.About', {
 								pwd : window.localStorage.getItem("pwd")
 							},
 						    callback : function(ajax, success, response) {
-						    	// rmeove Loading... item
-						    	target.getStore().removeAt(0);
+						    	target.getStore().removeAll();
 
 						    	if (success) {
 						    		var json = Ext.JSON.decode(response.responseText);
@@ -111,9 +124,36 @@ Ext.define('IU.view.About', {
 						    			value : json.email,
 						    			group : 'Your Profile',
 						    			group_index : 0
-						    		}];
+						    		}, {
+										name : 'Name',
+										value : 'IQRA University (IU)',
+										group : 'App Info',
+										group_index : 1
+									}, {
+										name : 'Version',
+										value : '2.0',
+										group : 'App Info',
+										group_index : 1
+									}, {
+										name : 'Founded Year',
+										value : '2011',
+										group : 'App Info',
+										group_index : 1
+									}, {
+										name : 'Name',
+										value : 'Umair Ashraf',
+										group : 'Developer Info',
+										group_index : 2
+									}, {
+										name : 'Website',
+										value : 'http://umairashraf.me/',
+										group : 'Developer Info',
+										group_index : 2
+									}];
 
 						    		target.getStore().add(items);
+
+						    		StoreStates['about'] = true;
 						    	}
 
 						    	// save changes and reload

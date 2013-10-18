@@ -12,6 +12,14 @@
 
 BaseURL = '';
 
+StoreStates = {
+    'news': false,
+    'semesterschedule': false,
+    'attendance': false,
+    'transcript': false,
+    'about': false
+}
+
 Ext.application({
     name: 'IU',
 

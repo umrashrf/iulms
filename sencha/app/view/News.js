@@ -20,7 +20,9 @@ Ext.define('IU.view.News', {
 			painted : function(sender, eOpts) {
 				target = Ext.getCmp('iu-news');
 
-				if (!target.getStore().isLoaded()) {
+				if (!StoreStates['news']) {
+					target.getStore().removeAll();
+
 					target.setMasked({
 						xtype : 'loadmask',
 						message : 'Loading <br>News'
@@ -28,6 +30,7 @@ Ext.define('IU.view.News', {
 
 					target.getStore().load({
 						callback : function() {
+							StoreStates['news'] = true;
 							target.setMasked(false);
 						}
 					});
