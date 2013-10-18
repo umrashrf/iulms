@@ -31,6 +31,7 @@ Ext.define('IU.view.Transcript', {
 			store : 'Transcript',
 			grouped : true,
 			selectedCls : '',
+			loadingText: false,
 			itemTpl : ['<div>', '<div class="iu-list-item">{course_name}</div>', '<div class="iu-list-sub-item">Grade: {grade}, GPA: {gpa}</div>', '</div>'].join(''),
 			emptyText : 'IULMS returned no transcript data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
@@ -44,12 +45,12 @@ Ext.define('IU.view.Transcript', {
 						},
 						callback : function(records, operation, success) {
 							var transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
-							
+
 							var toolbar = Ext.getCmp('iu-transcript').getAt(0);
 							toolbar.getAt(0).setHtml('CGPA: <b>' + (transcript.cgpa || '0.0') + '</b>');
 							toolbar.getAt(1).setHtml('Credit Hours: <b>' + (transcript.hours || 0) + '</b>');
 
-							target.setMasked(false);	
+							target.setMasked(false);
 						}
 					});
 				}
@@ -58,7 +59,7 @@ Ext.define('IU.view.Transcript', {
 				painted : function(sender, eOpts) {
 					var toolbar = Ext.getCmp('iu-transcript').getAt(0);
 					var target = Ext.getCmp('iu-transcript').getAt(1);
-					
+
 					if (!target.getStore().isLoaded()) {
 						target.setMasked({
 							xtype : 'loadmask',
@@ -72,13 +73,13 @@ Ext.define('IU.view.Transcript', {
 							},
 							callback : function(records, operation, success) {
 								var transcript = Ext.JSON.decode(operation.getResponse().responseText, true);
-								
+
 								toolbar.getAt(0).setHtml('CGPA: <b>' + (transcript.cgpa || '0.0') + '</b>');
 								toolbar.getAt(1).setHtml('Credit Hours: <b>' + (transcript.hours || 0) + '</b>');
 
-								target.setMasked(false);	
+								target.setMasked(false);
 							}
-						});	
+						});
 					}
 				}
 			}

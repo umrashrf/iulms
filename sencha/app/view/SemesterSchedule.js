@@ -6,6 +6,7 @@ Ext.define('IU.view.SemesterSchedule', {
 		layout : 'fit',
 		store : 'SemesterSchedule',
 		selectedCls : '',
+		loadingText: false,
 		itemTpl : ['<div>', '<div class="iu-list-item">{course_name} <small>by {faculty_name}</small></div>', '<div class="iu-list-sub-item">{time} on {day}</div>', '</div>'].join(''),
 		emptyText : 'IULMS returned no semester schedule data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 		plugins : [{

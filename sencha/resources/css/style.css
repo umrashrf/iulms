@@ -83,6 +83,6 @@ html, body {
 .iu-transcript .iu-transcript-cgpa, .iu-transcript .iu-transcript-hours {
 	padding: 0.65em 0.8em;
 }
-.iu-about {
+.iu-about .x-body {
 	font-size: 75%;
 }

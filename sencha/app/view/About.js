@@ -9,12 +9,13 @@ Ext.define('IU.view.About', {
 			store : 'About',
 			grouped : true,
 			selectedCls : '',
+			loadingText: false,
 			itemTpl : '<div class="iu-box" style="width: 30%;">{name}</div><div class="iu-box iu-text-right" style="width: 70%;">{value}</div>',
 			emptyText : 'IULMS returned no profile data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
 				xclass : 'Ext.plugin.PullRefresh',
-				refreshFn : function(plugin) {
-					var store = plugin.getList().getStore();
+				fetchLatest : function() {
+					var store = this.getList().getStore();
 
 					// load profile here
 					Ext.Ajax.request({
@@ -58,7 +59,6 @@ Ext.define('IU.view.About', {
 					    			group : 'Your Profile',
 					    			group_index : 0
 					    		}];
-
 					    		store.add(items);
 
 						    	// save changes and reload
@@ -67,6 +67,12 @@ Ext.define('IU.view.About', {
 					    	}
 					    }
 					});
+
+					// Call the two functions
+					this.setState("loaded");
+					if (this.getAutoSnapBack()) {
+						this.snapBack();
+					}
 				}
 			}]
 		}],

@@ -6,6 +6,7 @@ Ext.define('IU.view.News', {
 		store : 'News',
 		grouped: true,
 		selectedCls : '',
+		loadingText: false,
 		itemTpl : ['<div class="iu-list-item">{title}</div>'].join(''),
 		emptyText : '"Iqra University - IU" Facebook page has no updates.',
 		plugins : [{
