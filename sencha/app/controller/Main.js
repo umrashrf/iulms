@@ -160,11 +160,11 @@ Ext.define('IU.controller.Main', {
 
 			// these variables prevents loading stores on every paint
 			// explicitly ask them to load on next pain
-			StoreStates['news'] = false;
-			StoreStates['semesterschedule'] = false;
-			StoreStates['attendance'] = false;
-			StoreStates['transcript'] = false;
-			StoreStates['about'] = false;
+			IU.util.Config.setStoreState('News', false);
+			IU.util.Config.setStoreState('SemesterSchedule', false);
+			IU.util.Config.setStoreState('Attendance', false);
+			IU.util.Config.setStoreState('Transcript', false);
+			IU.util.Config.setStoreState('About', false);
 
 			sender.reset();
 			sender.setMasked(false);
@@ -185,11 +185,11 @@ Ext.define('IU.controller.Main', {
 		window.localStorage.removeItem("pwd");
 
 		// these variables prevents loading stores on every paint
-		StoreStates['news'] = false;
-		StoreStates['semesterschedule'] = false;
-		StoreStates['attendance'] = false;
-		StoreStates['transcript'] = false;
-		StoreStates['about'] = false;
+		IU.util.Config.setStoreState('News', false);
+		IU.util.Config.setStoreState('SemesterSchedule', false);
+		IU.util.Config.setStoreState('Attendance', false);
+		IU.util.Config.setStoreState('Transcript', false);
+		IU.util.Config.setStoreState('About', false);
 
 		this.redirectTo('/login');
 	},

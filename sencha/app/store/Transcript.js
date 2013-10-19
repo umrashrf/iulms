@@ -4,7 +4,7 @@ Ext.define('IU.store.Transcript', {
 		model : 'IU.model.Transcript',
 		proxy : {
 			type : 'ajax',
-			url : BaseURL + '/transcript',
+			url : IU.util.Config.getAbsoluteURL('/transcript'),
 			reader : {
 				type : 'json',
 				rootProperty : 'attemptedCourses'

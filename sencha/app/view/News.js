@@ -20,7 +20,7 @@ Ext.define('IU.view.News', {
 			painted : function(sender, eOpts) {
 				target = Ext.getCmp('iu-news');
 
-				if (!StoreStates['news']) {
+				if (!IU.util.Config.getStoreState('News')) {
 					target.getStore().removeAll();
 
 					target.setMasked({
@@ -30,7 +30,7 @@ Ext.define('IU.view.News', {
 
 					target.getStore().load({
 						callback : function() {
-							StoreStates['news'] = true;
+							IU.util.Config.setStoreState('News', true);
 							target.setMasked(false);
 						}
 					});

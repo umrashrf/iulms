@@ -4,7 +4,7 @@ Ext.define('IU.store.News', {
 		model : 'IU.model.News',
 		proxy : {
 			type : 'ajax',
-			url : BaseURL + '/news',
+			url : IU.util.Config.getAbsoluteURL('/news'),
 			reader : {
 				type : 'xml',
 				record : 'entry',

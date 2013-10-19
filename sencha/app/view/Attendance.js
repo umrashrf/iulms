@@ -33,7 +33,7 @@ Ext.define('IU.view.Attendance', {
 				var task  =Ext.create('Ext.util.DelayedTask', function() {
 					target = Ext.getCmp('iu-attendance');
 
-					if (!StoreStates['attendance']) {
+					if (!IU.util.Config.getStoreState('Attendance')) {
 						target.getStore().removeAll();
 
 						target.setMasked({
@@ -47,7 +47,7 @@ Ext.define('IU.view.Attendance', {
 								pwd : window.localStorage.getItem("pwd")
 							},
 							callback : function() {
-								StoreStates['attendance'] = true;
+								IU.util.Config.setStoreState('Attendance', true);
 								target.setMasked(false);
 							}
 						});

@@ -4,7 +4,7 @@ Ext.define('IU.view.Login', {
 	xtype : 'iu-login',
 	config : {
 		cls : 'iu-login',
-		url : BaseURL + '/login',
+		url : IU.util.Config.getAbsoluteURL('/login'),
 		submitOnAction : true,
 		standardSubmit : false,
 		items : [{

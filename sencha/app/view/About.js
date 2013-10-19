@@ -20,7 +20,7 @@ Ext.define('IU.view.About', {
 
 					// load profile here
 					Ext.Ajax.request({
-					    url: BaseURL + '/profile',
+					    url: IU.util.Config.getAbsoluteURL('/profile'),
 					    params : {
 							id : window.localStorage.getItem("id"),
 							pwd : window.localStorage.getItem("pwd")
@@ -95,10 +95,10 @@ Ext.define('IU.view.About', {
 				setTimeout(function() {
 					var target = Ext.getCmp('iu-about').getAt(0);
 
-					if (!StoreStates['about']) {
+					if (!IU.util.Config.getStoreState('About')) {
 						// load profile here
 						Ext.Ajax.request({
-						    url: BaseURL + '/profile',
+						    url: IU.util.Config.getAbsoluteURL('/profile'),
 						    params : {
 								id : window.localStorage.getItem("id"),
 								pwd : window.localStorage.getItem("pwd")
@@ -153,7 +153,7 @@ Ext.define('IU.view.About', {
 
 						    		target.getStore().add(items);
 
-						    		StoreStates['about'] = true;
+						    		IU.util.Config.setStoreState('About', true);
 						    	}
 
 						    	// save changes and reload

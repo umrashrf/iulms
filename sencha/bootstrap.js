@@ -650,6 +650,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "IU.store.News": [],
   "IU.store.SemesterSchedule": [],
   "IU.store.Transcript": [],
+  "IU.util.Config": [],
   "IU.view.About": [],
   "IU.view.Attendance": [],
   "IU.view.Login": [],
@@ -1386,6 +1387,7 @@ Ext.ClassManager.addNameAliasMappings({
   "IU.store.News": [],
   "IU.store.SemesterSchedule": [],
   "IU.store.Transcript": [],
+  "IU.util.Config": [],
   "IU.view.About": [
     "widget.iu-about"
   ],

@@ -60,7 +60,7 @@ Ext.define('IU.view.Transcript', {
 					var toolbar = Ext.getCmp('iu-transcript').getAt(0);
 					var target = Ext.getCmp('iu-transcript').getAt(1);
 
-					if (!StoreStates['transcript']) {
+					if (!IU.util.Config.getStoreState('Transcript')) {
 						target.getStore().removeAll();
 
 						target.setMasked({
@@ -79,7 +79,7 @@ Ext.define('IU.view.Transcript', {
 								toolbar.getAt(0).setHtml('CGPA: <b>' + (transcript.cgpa || '0.0') + '</b>');
 								toolbar.getAt(1).setHtml('Credit Hours: <b>' + (transcript.hours || 0) + '</b>');
 
-								StoreStates['transcript'] = true;
+								IU.util.Config.setStoreState('Transcript', true);
 								target.setMasked(false);
 							}
 						});

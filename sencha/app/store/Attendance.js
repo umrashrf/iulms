@@ -4,7 +4,7 @@ Ext.define('IU.store.Attendance', {
 		model : 'IU.model.Attendance',
 		proxy : {
 			type : 'ajax',
-			url : BaseURL + '/attendance',
+			url : IU.util.Config.getAbsoluteURL('/attendance'),
 			reader : {
 				type : 'json'
 			}

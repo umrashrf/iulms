@@ -25,7 +25,7 @@ Ext.define('IU.view.SemesterSchedule', {
 			painted : function(sender, eOpts) {
 				target = Ext.getCmp('iu-semesterschedule');
 
-				if (!StoreStates['semesterschedule']) {
+				if (!IU.util.Config.getStoreState('SemesterSchedule')) {
 					target.getStore().removeAll();
 
 					target.setMasked({
@@ -39,7 +39,7 @@ Ext.define('IU.view.SemesterSchedule', {
 							pwd : window.localStorage.getItem("pwd")
 						},
 						callback : function() {
-							StoreStates['semesterschedule'] = true;
+							IU.util.Config.setStoreState('SemesterSchedule', true);
 							target.setMasked(false);
 						}
 					});
