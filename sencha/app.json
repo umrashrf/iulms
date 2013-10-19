@@ -19,16 +19,6 @@
     "url": null,
 
     /**
-     * Base URL for API calls.
-     */
-    "base_api_dev": "",
-
-    /**
-     * Base URL for API calls.
-     */
-    "base_api_prod": "http://www.iulmsapp.tk",
-
-    /**
      * List of all JavaScript assets in the right execution order.
      * Each item is an object with the following format:
      *      {

@@ -10,21 +10,12 @@
     will need to resolve manually.
 */
 
-BaseURL = '';
-
-StoreStates = {
-    'news': false,
-    'semesterschedule': false,
-    'attendance': false,
-    'transcript': false,
-    'about': false
-}
-
 Ext.application({
     name: 'IU',
 
     requires: [
-        'Ext.MessageBox', 'Ext.plugin.PullRefresh', 'Ext.util.DelayedTask'
+        'Ext.MessageBox', 'Ext.plugin.PullRefresh',
+        'Ext.util.DelayedTask', 'IU.util.Config'
     ],
 
     models : [
@@ -63,19 +54,6 @@ Ext.application({
     },
 
     launch: function() {
-        Ext.Ajax.request({
-            url: 'app.json',
-            success: function(response) {
-                str = response.responseText.replace(/\/\*.*\*\//mg, '');
-                config = Ext.JSON.decode(str);
-
-                BaseURL = config['base_api_dev'];
-                if (document.URL.indexOf("http://") === -1) {
-                    BaseURL = config['base_api_prod'];
-                }
-            }
-        });
-
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
