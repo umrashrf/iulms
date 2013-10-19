@@ -25,4 +25,5 @@ android/bin/
 *.pyc
 
 # Sencha Touch
-build/
+build/*
+!build/production/
