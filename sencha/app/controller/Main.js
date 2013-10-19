@@ -170,6 +170,8 @@ Ext.define('IU.controller.Main', {
 			sender.setMasked(false);
 
 			this.redirectTo('/tabs');
+		} else {
+			Ext.Msg.alert("Oops!", "Your ID or Password is wrong.", Ext.emptyFn);
 		}
 	},
 	onLoginFail : function(sender, result, eOpts) {
