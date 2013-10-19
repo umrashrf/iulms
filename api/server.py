@@ -27,6 +27,7 @@ class Handler():
 
 class General(Handler):
     app_dir = 'sencha'
+    app_dir = 'build/production/me.umairashraf.iu'
 
     def GET(self, path):
         if path.startswith('touch/'):
