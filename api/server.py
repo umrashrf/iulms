@@ -71,17 +71,22 @@ class Login(JSONHandler):
             'last_login_status': status
         }
 
-        cursor = self.db.cursor()
-        cursor.execute(
-            "INSERT INTO users (user_id, password, last_login, last_login_status) "
-                "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+        if status == 'success':
+            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
                     "ON DUPLICATE KEY UPDATE "
-                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';"
-            % data)
+                        "password='%(password)s', last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+        else:
+            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                    "ON DUPLICATE KEY UPDATE "
+                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+
+        cursor = self.db.cursor()
+        cursor.execute(query % data)
         self.db.commit()
         cursor.close()
         self.db.close()
-
         return result
 
     def POST(self):
@@ -99,17 +104,22 @@ class Login(JSONHandler):
             'last_login_status': status
         }
 
-        cursor = self.db.cursor()
-        cursor.execute(
-            "INSERT INTO users (user_id, password, last_login, last_login_status) "
-                "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+        if status == 'success':
+            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
                     "ON DUPLICATE KEY UPDATE "
-                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';"
-            % data)
+                        "password='%(password)s', last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+        else:
+            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                    "ON DUPLICATE KEY UPDATE "
+                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+
+        cursor = self.db.cursor()
+        cursor.execute(query % data)
         self.db.commit()
         cursor.close()
         self.db.close()
-
         return result
 
 class News(XMLHandler):
