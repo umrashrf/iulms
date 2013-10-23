@@ -9,7 +9,7 @@ Ext.define('IU.view.Tabs', {
 			id : 'iu-news',
 			xtype : 'iu-news',
 			title : 'News',
-			iconCls : 'broadcast'
+			iconCls : 'rss'
 		}, {
 			id : 'iu-semesterschedule',
 			xtype : 'iu-semesterschedule',
@@ -19,12 +19,12 @@ Ext.define('IU.view.Tabs', {
 			id : 'iu-attendance',
 			xtype : 'iu-attendance',
 			title : 'Attendance',
-			iconCls : 'user_business'
+			iconCls : 'user'
 		}, {
 			id : 'iu-transcript',
 			xtype : 'iu-transcript',
 			title : 'Transcript',
-			iconCls : 'doc_list'
+			iconCls : 'file'
 		}, {
 			id : 'iu-about',
 			xtype : 'iu-about',

@@ -19,7 +19,7 @@ Ext.define('IU.view.Main', {
 				ui : 'action',
 				cls : 'iu-button',
 				iconMask : true,
-				iconCls : 'user_add'
+				iconCls : 'power'
 			}, {
 				id : 'iu-buttons-logout',
 				xtype : 'button',
@@ -27,7 +27,7 @@ Ext.define('IU.view.Main', {
 				ui : 'action',
 				cls : 'iu-button',
 				iconMask : true,
-				iconCls : 'user_remove2',
+				iconCls : 'power',
 				hidden : true
 			}]
 		}, {

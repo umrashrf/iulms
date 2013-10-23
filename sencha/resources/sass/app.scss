@@ -29,10 +29,9 @@ $form-label-color: rgba(1, 1, 1, 0);
 // Examples of using the icon mixin:
 // @include icon('user');
 
-@include icon('user_add', 'Q');
-@include icon('user_remove2', 'Q');
-@include icon('broadcast', 'f');
-@include icon('calendar', '\\');
-@include icon('user_business', 'U');
-@include icon('doc_list', 'F');
-@include icon('info', '?');
+@include icon('power');
+@include icon('rss');
+@include icon('calendar');
+@include icon('user');
+@include icon('file');
+@include icon('info');
