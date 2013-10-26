@@ -39,16 +39,20 @@
      *      }
      */
     "js": [
-        {
-            "path": "resources/libs/moment.min.js"
-        },
-        {
+		{
+			"path": "cordova.js",
+			"remote": true
+		},
+		{
             "path": "../touch/sencha-touch.js",
             "x-bootstrap": true
         },
         {
             "path": "bootstrap.js",
             "x-bootstrap": true
+        },
+        {
+            "path": "resources/libs/moment.min.js"
         },
         {
             "path": "app.js",
@@ -110,6 +114,7 @@
      * Extra resources to be copied along when build
      */
     "resources": [
+		"config.xml",
         "resources/libs",
         "resources/icons",
         "resources/startup"

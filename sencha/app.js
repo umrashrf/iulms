@@ -45,7 +45,7 @@ Ext.application({
     isIconPrecomposed: true,
 
     startupImage: {
-        '320x460': 'resources/startup/320x460.jpg',
+        '320x460': 'resources/startup/320x460.png',
         '640x920': 'resources/startup/640x920.png',
         '768x1004': 'resources/startup/768x1004.png',
         '748x1024': 'resources/startup/748x1024.png',

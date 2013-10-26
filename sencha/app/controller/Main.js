@@ -196,7 +196,7 @@ Ext.define('IU.controller.Main', {
 		this.redirectTo('/login');
 	},
 	onNewsTap : function(sender, index, target, record, e, eOpts) {
-
+		navigator.app.loadUrl(record.get('link'), { openExternal:true } );
 	},
 	/**
 	 * Utility Functions
