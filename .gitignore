@@ -26,4 +26,3 @@ android/bin/
 
 # Sencha Touch
 build/*
-!build/production/
