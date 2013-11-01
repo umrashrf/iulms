@@ -30,14 +30,20 @@ class General(Handler):
     app_dir = 'build/production/me.umairashraf.iu'
 
     def GET(self, path):
-        if path.startswith('touch/'):
-            self.app_dir = ''
-        root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../"))
-        dest = '%s/%s/index.html' % (root, self.app_dir)
-        if path:
-            dest = '%s/%s/%s' % (root, self.app_dir, path)
-        with open(dest, 'r') as f:
-            return f.read()
+        try:
+            if path.startswith('touch/'):
+                self.app_dir = ''
+            root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../"))
+            dest = '%s/%s/index.html' % (root, self.app_dir)
+            if path:
+                dest = '%s/%s/%s' % (root, self.app_dir, path)
+            with open(dest, 'r') as f:
+                return f.read()
+        except:
+            status = '404 Not Found'
+            headers = {'Content-Type': 'text/html'}
+            data = 'Resource not found.'
+            raise web.HTTPError(status, headers, data)
         return ''
 
 class JSONHandler(Handler):
