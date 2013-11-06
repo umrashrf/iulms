@@ -31,6 +31,10 @@ Ext.define('IU.view.About', {
 					    	if (success) {
 					    		var json = Ext.JSON.decode(response.responseText);
 
+					    		if (json.last_name.length > 0) {
+					    			json.last_name = ' ' + json.last_name
+					    		}
+
 					    		var items = [{
 					    			name : 'Reg ID',
 					    			value : json.reg_id,
@@ -108,6 +112,10 @@ Ext.define('IU.view.About', {
 
 						    	if (success) {
 						    		var json = Ext.JSON.decode(response.responseText);
+
+						    		if (json.last_name.length > 0) {
+						    			json.last_name = ' ' + json.last_name
+						    		}
 
 						    		var items = [{
 						    			name : 'Reg ID',
