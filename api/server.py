@@ -168,6 +168,7 @@ class Profile(JSONHandler):
         return json.dumps([])
 
 if __name__ == '__main__':
+    web.config.debug = os.getenv('DEBUG', False)
     web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
     app = web.application(urls, globals())
     app.run()
