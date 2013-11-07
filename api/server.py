@@ -56,123 +56,118 @@ class XMLHandler(Handler):
 
 class Login(JSONHandler):
     def __init__(self):
-        host = os.getenv('MYSQL_HOST', 'localhost')
-        user = os.getenv('MYSQL_USER', 'root')
-        pwd = os.getenv('MYSQL_PWD', 'root')
-        db = os.getenv('MYSQL_DB', 'iulms')
-        self.db = MySQLdb.connect(host=host, user=user, passwd=pwd, db=db)
+        try:
+            host = os.getenv('MYSQL_HOST', 'localhost')
+            user = os.getenv('MYSQL_USER', 'root')
+            pwd = os.getenv('MYSQL_PWD', 'root')
+            db = os.getenv('MYSQL_DB', 'iulms')
+            self.db = MySQLdb.connect(host=host, user=user, passwd=pwd, db=db)
+        except:
+            self.db = None
 
     def GET(self):
-        status = 'failure'
-        result = json.dumps({'success': 'false'})
-
-        i = web.input(id='', pwd='', password='')
-        if login(i.id, i.pwd or i.password):
-            status = 'success'
-            result = json.dumps({'success': 'true'})
-
-        data = {
-            'user_id': i.id,
-            'password': i.pwd or i.password,
-            'last_login_status': status
-        }
-
-        if status == 'success':
-            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
-                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
-                    "ON DUPLICATE KEY UPDATE "
-                        "password='%(password)s', last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
-        else:
-            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
-                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
-                    "ON DUPLICATE KEY UPDATE "
-                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
-
-        cursor = self.db.cursor()
-        cursor.execute(query % data)
-        self.db.commit()
-        cursor.close()
-        self.db.close()
-        return result
+        return self.login()
 
     def POST(self):
+        return self.login()
+
+    def login(self):
         status = 'failure'
         result = json.dumps({'success': 'false'})
 
-        i = web.input(id='', pwd='', password='')
-        if login(i.id, i.pwd or i.password):
-            status = 'success'
-            result = json.dumps({'success': 'true'})
+        try:
+            i = web.input(id='', pwd='', password='')
+            if login(i.id, i.pwd or i.password):
+                status = 'success'
+                result = json.dumps({'success': 'true'})
+        except:
+            return result
 
-        data = {
-            'user_id': i.id,
-            'password': i.pwd or i.password,
-            'last_login_status': status
-        }
+        if self.db:
+            data = {
+                'user_id': i.id,
+                'password': i.pwd or i.password,
+                'last_login_status': status
+            }
 
-        if status == 'success':
-            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
-                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
-                    "ON DUPLICATE KEY UPDATE "
-                        "password='%(password)s', last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
-        else:
-            query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
-                        "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
-                    "ON DUPLICATE KEY UPDATE "
-                        "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+            if status == 'success':
+                query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                            "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                        "ON DUPLICATE KEY UPDATE "
+                            "password='%(password)s', last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
+            else:
+                query = ("INSERT INTO users (user_id, password, last_login, last_login_status) "
+                            "VALUES ('%(user_id)s', '%(password)s', CURRENT_TIMESTAMP, '%(last_login_status)s') "
+                        "ON DUPLICATE KEY UPDATE "
+                            "last_login=CURRENT_TIMESTAMP, last_login_status='%(last_login_status)s';")
 
-        cursor = self.db.cursor()
-        cursor.execute(query % data)
-        self.db.commit()
-        cursor.close()
-        self.db.close()
+            cursor = self.db.cursor()
+            cursor.execute(query % data)
+            self.db.commit()
+            cursor.close()
+            self.db.close()
+
         return result
 
 class News(XMLHandler):
     def GET(self):
-        url = 'https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100'
-        return requests.get(url).content
+        try:
+            url = 'https://www.facebook.com/feeds/page.php?format=atom10&id=140641789392100'
+            return requests.get(url).content
+        except:
+            return ''
 
 class Schedule(JSONHandler):
     def GET(self):
-        i = web.input(id='', pwd='', password='')
-        l = login(i.id, i.pwd or i.password)
-        if l:
-            return json.dumps(get_schedule(l))
+        try:
+            i = web.input(id='', pwd='', password='')
+            l = login(i.id, i.pwd or i.password)
+            if l:
+                return json.dumps(get_schedule(l))
+        except:
+            pass
         return json.dumps([])
 
 class Attendance(JSONHandler):
     def GET(self):
-        i = web.input(id='', pwd='', password='')
-        l = login(i.id, i.pwd or i.password)
-        if l:
-            return json.dumps(get_attendance(l))
+        try:
+            i = web.input(id='', pwd='', password='')
+            l = login(i.id, i.pwd or i.password)
+            if l:
+                return json.dumps(get_attendance(l))
+        except:
+            pass
         return json.dumps([])
 
 class Transcript(JSONHandler):
     def GET(self):
-        i = web.input(id='', pwd='', password='')
-        l = login(i.id, i.pwd or i.password)
-        if l:
-            return json.dumps(get_transcript(l))
+        try:
+            i = web.input(id='', pwd='', password='')
+            l = login(i.id, i.pwd or i.password)
+            if l:
+                return json.dumps(get_transcript(l))
+        except:
+            pass
         return json.dumps([])
 
 class Profile(JSONHandler):
     def GET(self):
-        i = web.input(id='', pwd='', password='')
-        l = login(i.id, i.pwd or i.password)
-        if l:
-            return json.dumps(get_profile(l, i.id))
-        return json.dumps([])
+        return self.profile()
 
     def POST(self):
-        i = web.input(id='', pwd='', password='')
-        l = login(i.id, i.pwd or i.password)
-        if l:
-            return json.dumps(get_profile(l, i.id))
+        return self.profile()
+
+    def profile(self):
+        try:
+            i = web.input(id='', pwd='', password='')
+            l = login(i.id, i.pwd or i.password)
+            if l:
+                return json.dumps(get_profile(l, i.id))
+        except:
+            pass
         return json.dumps([])
 
 if __name__ == '__main__':
-    web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
+    #web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
     app = web.application(urls, globals())
     app.run()
