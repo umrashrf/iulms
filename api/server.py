@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import os
 import web
 import json
@@ -18,33 +16,11 @@ urls = (
     '/schedule', 'Schedule',
     '/attendance', 'Attendance',
     '/transcript', 'Transcript',
-    '/profile', 'Profile',
-    '/(.*)', 'General'
+    '/profile', 'Profile'
 )
 
 class Handler():
     pass
-
-class General(Handler):
-    app_dir = 'sencha'
-    app_dir = 'build/production/me.umairashraf.iu'
-
-    def GET(self, path):
-        try:
-            if path.startswith('touch/'):
-                self.app_dir = ''
-            root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../"))
-            dest = '%s/%s/index.html' % (root, self.app_dir)
-            if path:
-                dest = '%s/%s/%s' % (root, self.app_dir, path)
-            with open(dest, 'r') as f:
-                return f.read()
-        except:
-            status = '404 Not Found'
-            headers = {'Content-Type': 'text/html'}
-            data = 'Resource not found.'
-            raise web.HTTPError(status, headers, data)
-        return ''
 
 class JSONHandler(Handler):
     def __init__(self):
@@ -167,8 +143,5 @@ class Profile(JSONHandler):
             pass
         return json.dumps([])
 
-if __name__ == '__main__':
-    web.config.debug = os.getenv('DEBUG', False)
-    web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
-    app = web.application(urls, globals())
-    app.run()
+web.config.debug = os.getenv('DEBUG', False)
+wsgi_app = web.application(urls, globals()).wsgifunc()
