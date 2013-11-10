@@ -1,17 +1,17 @@
 {
   "name": "IQRA University (IU)",
-	"version": "2.0",
+	"version": "2.1",
 	"manifest_version": 2,
-	"description": "IQRA University app for android lets you check your attendance on the go. More features are around the corner.",
-	"icons": { 
-    "16": "icons/icon-16.png", 
-    "72": "icons/icon-72.png", 
-    "96": "icons/icon-96.png", 
-    "128": "icons/icon-128.png" 
+	"description": "IULMS on chrome app store is for you to check attendance, transcript, schedule and news quickly.",
+	"icons": {
+    "16": "icons/icon-16.png",
+    "72": "icons/icon-72.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
   },
   "app": {
     "launch": {
-      "web_url": "http://iu.umairashraf.me/sencha/"
+      "web_url": "http://www.iulmsapp.tk/"
     }
   }
 }
