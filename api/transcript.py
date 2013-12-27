@@ -1,3 +1,4 @@
+import re
 import json
 import requests
 
@@ -23,7 +24,9 @@ def get_transcript(session):
                                                 'action': 'GetTranscript',
                                                 'degreeId': slug
                                             })
-        transcript = json.loads(transcript.content)
+
+        data = re.sub('[\x90-\xff]', '', transcript.content)
+        transcript = json.loads(data)
         transcript['degree'] = degree
 
         cgpa = 0
