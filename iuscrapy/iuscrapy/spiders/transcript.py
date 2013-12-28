@@ -1,12 +1,10 @@
 import re
 import json
 
-from datetime import date
-
 from scrapy.http import Request, FormRequest
 from scrapy.selector import Selector
 
-from . import get_first, get_season
+from . import get_first
 from .login import Login
 from iuscrapy.items import TranscriptItem
 
