@@ -11,15 +11,13 @@ from iuscrapy.items import ProfileItem
 
 class Profile(Login):
     name = 'profile'
+    start_urls = ['http://iulms.edu.pk/user/edit.php?cancelemailchange=1']
 
-    def scrape(self, response):
-        return Request('http://iulms.edu.pk/user/edit.php?cancelemailchange=1', callback=self.scrape_profile)
-
-    def scrape_profile(self, response):
+    def parse(self, response):
         sel = Selector(response)
         get = lambda x: '//div[contains(@class, "fcontainer")]/div[contains(@class, "fitem")]%s' % x
         pi = ProfileItem()
-        pi['user'] = self.get_user_hash()
+        pi['user'] = response.meta.get('user')
         pi['first_name'] = get_first(sel.xpath(get('/div[div/label[contains(text(), "First name")]]/following-sibling::div[1]/text()')).extract())
         pi['last_name'] = get_first(sel.xpath(get('/div[div/label[contains(text(), "Surname")]]/following-sibling::div[1]/text()')).extract())
         pi['email'] = get_first(sel.xpath(get('//input[@name="email"]/@value')).extract())

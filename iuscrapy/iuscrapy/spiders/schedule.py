@@ -7,18 +7,16 @@ from iuscrapy.items import ScheduleItem
 
 class Schedule(Login):
     name = 'schedule'
+    start_urls = ['http://iulms.edu.pk/sic/Schedule.php']
 
-    def scrape(self, response):
-        return Request('http://iulms.edu.pk/sic/Schedule.php', callback=self.scrape_schedule)
-
-    def scrape_schedule(self, response):
+    def parse(self, response):
         sel = Selector(response)
         get = lambda x: 'td[@class="detailsStyle"]/table/tr/td/span[contains(text(), "%s")]/following-sibling::text()[1]' % x
         trs = sel.xpath('//div[p/span[contains(text(), "Semester Schedule")]]/following-sibling::table[1]/tr')
         for i, tr in enumerate(trs):
             ai = ScheduleItem()
             ai['_index'] = i
-            ai['user'] = self.get_user_hash()
+            ai['user'] = response.meta.get('user')
             day = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/span/text()').extract()).title()
             ai['day'] = 'N/A' if day == 'Non' else day
             time = get_first(tr.xpath('td[@class="dateStyle"]/table/tr/td/text()').extract())

@@ -10,3 +10,5 @@ ITEM_PIPELINES = {
 }
 
 IMAGES_STORE = '/home/umair/Development/IQRAUniversity/src/iuscrapy/images'
+
+SESSION_STORE = '/home/umair/Development/IQRAUniversity/.sessions'

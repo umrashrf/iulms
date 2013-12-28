@@ -11,18 +11,16 @@ from iuscrapy.items import AttendanceItem
 
 class Attendance(Login):
     name = 'attendance'
+    start_urls = ['http://iulms.edu.pk/sic/StudentAttendance.php']
 
-    def scrape(self, response):
-        return Request('http://iulms.edu.pk/sic/StudentAttendance.php', callback=self.scrape_attendance)
-
-    def scrape_attendance(self, response):
+    def parse(self, response):
         sel = Selector(response)
         trs = sel.xpath('//table[contains(@class, "attendance-table")]/tr[position()>1 or contains(@class, "attendanceRow")]')
         today = date.today()
         for i, tr in enumerate(trs):
             ai = AttendanceItem()
             ai['_index'] = i
-            ai['user'] = self.get_user_hash()
+            ai['user'] = response.meta.get('user')
             ai['semester'] = '%s %s' % (get_season(today), today.strftime('%Y'))
             ai['course_name'] = get_first(tr.xpath('td[contains(@class, "attendanceRowCourse")]/text()').extract()).strip()
             ai['course_id'] = get_first(re.findall('\((\d+)\)$', ai['course_name']))

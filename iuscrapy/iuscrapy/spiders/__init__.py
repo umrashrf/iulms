@@ -1,3 +1,6 @@
+import os
+import datetime
+
 def get_first(obj, index=0):
     if obj and len(obj) > index:
         return obj[index]
@@ -17,3 +20,18 @@ def get_season(date):
     else:
         s = 'Winter'
     return s
+
+def cookie_dict(cookie_str):
+    cookies = {}
+    for c in cookie_str.split(';'):
+        cparts = c.strip().split('=')
+        cookies.update({ cparts[0]: cparts[1] })
+    return cookies
+
+def flush_sessions(dir_to_search, minutes=10):
+    for dirpath, dirnames, filenames in os.walk(dir_to_search):
+       for f in filenames:
+          curpath = os.path.join(dirpath, f)
+          file_modified = datetime.datetime.fromtimestamp(os.path.getmtime(curpath))
+          if datetime.datetime.now() - file_modified > datetime.timedelta(minutes=minutes):
+              os.remove(curpath)
