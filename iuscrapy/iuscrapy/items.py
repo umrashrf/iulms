@@ -17,6 +17,7 @@ class AttendanceItem(Item):
     sessions = Field()
     presents = Field()
     absents = Field()
+    _index = Field()
 
 class TranscriptItem(Item):
     user = Field()

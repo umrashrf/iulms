@@ -19,8 +19,9 @@ class Attendance(Login):
         sel = Selector(response)
         trs = sel.xpath('//table[contains(@class, "attendance-table")]/tr[position()>1 or contains(@class, "attendanceRow")]')
         today = date.today()
-        for tr in trs:
+        for i, tr in enumerate(trs):
             ai = AttendanceItem()
+            ai['_index'] = i
             ai['user'] = self.get_user_hash()
             ai['semester'] = '%s %s' % (get_season(today), today.strftime('%Y'))
             ai['course_name'] = get_first(tr.xpath('td[contains(@class, "attendanceRowCourse")]/text()').extract()).strip()
