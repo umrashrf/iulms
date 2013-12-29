@@ -11,11 +11,15 @@ ITEM_PIPELINES = {
     'scrapy.contrib.pipeline.images.ImagesPipeline': 1
 }
 
-IMAGES_STORE = '/home/umair/Development/IQRAUniversity/src/iuscrapy/images'
+FEED_FORMAT = 'jsonlines'
+
+FEED_URI = '/home/umair/Development/IQRAUniversity/src/iuscrapy/feeds/%(name)s/%(time)s.jl'
+IMAGES_STORE = '/home/umair/Development/IQRAUniversity/src/iuscrapy/feeds/images'
 SESSION_STORE = '/home/umair/Development/IQRAUniversity/.sessions'
 
 PRODUCTION_PLATFORMS = ['web1']
 
 if platform.node() in PRODUCTION_PLATFORMS:
-    IMAGES_STORE = '/home/web/iulms/iuscrapy/images'
-    SESSION_STORE = '/home/web/iulms/iuscrapy/.sessions'
+    FEED_URI = '/home/web/iuscrapy/feeds'
+    IMAGES_STORE = '/home/web/iuscrapy/feeds/images'
+    SESSION_STORE = '/home/web/iuscrapy/.sessions'
