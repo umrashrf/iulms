@@ -14,7 +14,7 @@ Ext.define('IU.view.About', {
 			emptyText : 'IULMS returned no profile data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 			plugins : [{
 				xclass : 'Ext.plugin.PullRefresh',
-				fetchLatest : function() {
+				refreshFn : function() {
 					target = this.getList();
 					target.refresh();
 

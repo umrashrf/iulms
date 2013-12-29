@@ -12,7 +12,7 @@ Ext.define('IU.view.Attendance', {
 		emptyText : 'IULMS returned no attendance data.<div>Possible causes can be Teacher Evaluation, Degree Completed, Website Changed or Application Error.</div>',
 		plugins : [{
 			xclass : 'Ext.plugin.PullRefresh',
-			fetchLatest : function() {
+			refreshFn : function() {
 				var store = this.getList().getStore();
 				store.load({
 					params : {
