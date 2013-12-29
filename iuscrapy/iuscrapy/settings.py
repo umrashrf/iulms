@@ -10,5 +10,10 @@ ITEM_PIPELINES = {
 }
 
 IMAGES_STORE = '/home/umair/Development/IQRAUniversity/src/iuscrapy/images'
-
 SESSION_STORE = '/home/umair/Development/IQRAUniversity/.sessions'
+
+PRODUCTION_PLATFORMS = ['web1']
+
+if platform.node() in PRODUCTION_PLATFORMS:
+    IMAGES_STORE = '/home/web/iulms/iuscrapy/images'
+    SESSION_STORE = '/home/web/iulms/iuscrapy/.sessions'
