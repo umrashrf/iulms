@@ -1,3 +1,5 @@
+import platform
+
 BOT_NAME = 'iuscrapy'
 
 SPIDER_MODULES = ['iuscrapy.spiders']
