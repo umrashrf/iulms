@@ -20,6 +20,6 @@ SESSION_STORE = '/home/umair/Development/IQRAUniversity/.sessions'
 PRODUCTION_PLATFORMS = ['web1']
 
 if platform.node() in PRODUCTION_PLATFORMS:
-    FEED_URI = '/home/web/iuscrapy/feeds'
+    FEED_URI = '/home/web/iuscrapy/feeds/%(name)s/%(time)s.jl'
     IMAGES_STORE = '/home/web/iuscrapy/feeds/images'
     SESSION_STORE = '/home/web/iuscrapy/.sessions'
