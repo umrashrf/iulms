@@ -61,3 +61,15 @@ class TranscriptItem(Item):
     hours = Field()
     custom_cgpa = Field()
     courses = Field()
+
+class ResultItem(Item):
+    user = Field()
+    course_name = Field()
+    midterm = Field()
+    quizes_assignments = Field()
+    project = Field()
+    final = Field()
+    total = Field()
+    grade = Field()
+    points = Field()
+    _index = Field()
