@@ -69,7 +69,7 @@ class Login(BaseSpider):
             with open('%s/%s' % (settings['SESSION_STORE'], user), 'w+') as f:
                 f.write(json.dumps(cookie_dict(response.request.headers.get('Cookie'))))
         else:
-            self.log('Login failed', level=log.ERROR)
+            self.log('Login failed for %s' % user, level=log.ERROR)
             return
         return self.parse(response)
 
