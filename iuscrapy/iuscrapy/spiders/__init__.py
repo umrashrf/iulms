@@ -28,7 +28,7 @@ def cookie_dict(cookie_str):
         cookies.update({ cparts[0]: cparts[1] })
     return cookies
 
-def flush_sessions(dir_to_search, minutes=10):
+def flush_sessions(dir_to_search, minutes=60):
     for dirpath, dirnames, filenames in os.walk(dir_to_search):
        for f in filenames:
           curpath = os.path.join(dirpath, f)
