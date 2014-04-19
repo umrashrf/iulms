@@ -16,7 +16,8 @@ def get_attendance(session):
     get = lambda x: 'td[@class="detailsStyle"]/table/tr/td/span[contains(text(), "%s")]/following-sibling::text()[1]' % x
     attendances = []
     attendance_page = session.get('http://iulms.edu.pk/sic/StudentAttendance.php', headers=DEFAULT_HEADERS)
-    root = etree.HTML(attendance_page.content)
+    content = re.sub('[\x90-\xff]', '', attendance_page.content)
+    root = etree.HTML(content)
     trs = root.xpath('//table[contains(@class, "attendance-table")]/tr[position()>1 or contains(@class, "attendanceRow")]')
     for tr in trs:
         today = date.today()
